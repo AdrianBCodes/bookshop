@@ -1,6 +1,8 @@
 package org.bookstore.book;
 
 import org.bookstore.book.exceptions.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -20,29 +22,28 @@ public class BookService {
     }
 
     public Book findBookById(Long id){
-        var result = bookRepository.findBookById(id)
+        return bookRepository.findBookById(id)
                 .orElseThrow(() -> new NotFoundException("Book with id: " + id + " has not been found"));
-        return result;
     }
 
-    public List<Book> findAllBooks(){
-        return bookRepository.findAllBooks();
+    public Page<Book> findAllBooks(Pageable pageable){
+        return bookRepository.findAllBooks(pageable);
     }
 
-    public List<Book> findAllFreeBooks(){
-        return bookRepository.findAllFreeBooks();
+    public Page<Book> findAllFreeBooks(Pageable pageable){
+        return bookRepository.findAllFreeBooks(pageable);
     }
 
-    public List<Book> findAllPaidBooks(){
-        return bookRepository.findAllPaidBooks();
+    public Page<Book> findAllPaidBooks(Pageable pageable){
+        return bookRepository.findAllPaidBooks(pageable);
     }
 
-    public List<Book> findAllByName(String name){
-        return bookRepository.findAllByName(name);
+    public Page<Book> findAllByName(String name, Pageable pageable){
+        return bookRepository.findAllByName(name, pageable);
     }
 
-    public List<Book> findAllByCategory(BookCategory category){
-        return bookRepository.findAllWithCategory(category);
+    public Page<Book> findAllByCategory(BookCategory category, Pageable pageable){
+        return bookRepository.findAllWithCategory(category, pageable);
     }
 
     public void deleteBook(Book entity){

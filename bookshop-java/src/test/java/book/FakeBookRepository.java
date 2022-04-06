@@ -3,9 +3,14 @@ package book;
 import org.bookstore.book.Book;
 import org.bookstore.book.BookCategory;
 import org.bookstore.book.BookRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class FakeBookRepository implements BookRepository {
@@ -17,28 +22,33 @@ public class FakeBookRepository implements BookRepository {
     }
 
     @Override
-    public List<Book> findAllBooks() {
-        return new ArrayList<>(books.values());
+    public Page<Book> findAllBooks(Pageable pageable) {
+        var result = books.values().stream().toList();
+        return new PageImpl<>(result, pageable, result.size());
     }
 
     @Override
-    public List<Book> findAllFreeBooks() {
-        return books.values().stream().filter(book -> book.getPrice().equals(BigDecimal.ZERO)).collect(Collectors.toList());
+    public Page<Book> findAllFreeBooks(Pageable pageable) {
+        var result = books.values().stream().filter(book -> book.getPrice().equals(BigDecimal.ZERO)).toList();
+        return new PageImpl<>(result, pageable, result.size());
     }
 
     @Override
-    public List<Book> findAllPaidBooks() {
-        return books.values().stream().filter(book -> book.getPrice().doubleValue() > 0.0).collect(Collectors.toList());
+    public Page<Book> findAllPaidBooks(Pageable pageable) {
+        var result = books.values().stream().filter(book -> book.getPrice().doubleValue() > 0.0).toList();
+        return new PageImpl<>(result, pageable, result.size());
     }
 
     @Override
-    public List<Book> findAllByName(String name) {
-        return books.values().stream().filter(book -> book.getName().contains(name)).collect(Collectors.toList());
+    public Page<Book> findAllByName(String name, Pageable pageable) {
+        var result = books.values().stream().filter(book -> book.getName().contains(name)).toList();
+        return new PageImpl<>(result, pageable, result.size());
     }
 
     @Override
-    public List<Book> findAllWithCategory(BookCategory category) {
-        return books.values().stream().filter(book -> book.getCategory().equals(category)).collect(Collectors.toList());
+    public Page<Book> findAllWithCategory(BookCategory category, Pageable pageable) {
+        var result = books.values().stream().filter(book -> book.getCategory().equals(category)).toList();
+        return new PageImpl<>(result, pageable, result.size());
     }
 
     @Override

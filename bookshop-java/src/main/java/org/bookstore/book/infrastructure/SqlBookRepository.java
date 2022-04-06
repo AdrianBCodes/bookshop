@@ -3,7 +3,8 @@ package org.bookstore.book.infrastructure;
 import org.bookstore.book.Book;
 import org.bookstore.book.BookCategory;
 import org.bookstore.book.BookRepository;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
@@ -13,11 +14,11 @@ import java.util.Optional;
 
 public interface SqlBookRepository extends BookRepository, JpaRepository<Book, Long> {
 
-    List<Book> findAllByPriceEquals(BigDecimal price);
-    List<Book> findAllByPriceGreaterThan(BigDecimal price);
-    List<Book> findAllByNameContaining(String name);
-    List<Book> findAllByCategory(BookCategory category);
-
+    Page<Book> findAllByPriceEquals(BigDecimal price, Pageable pageable);
+    Page<Book> findAllByPriceGreaterThan(BigDecimal price,Pageable pageable);
+    Page<Book> findAllByNameContaining(String name, Pageable pageable);
+    Page<Book> findAllByCategory(BookCategory category, Pageable pageable);
+    Page<Book> findAll(Pageable pageable);
 
     @Override
     default Optional<Book> findBookById(Long id){
@@ -25,28 +26,28 @@ public interface SqlBookRepository extends BookRepository, JpaRepository<Book, L
     }
 
     @Override
-    default List<Book> findAllBooks() {
-        return this.findAll(Sort.by(Sort.Direction.ASC, "id"));
+    default Page<Book> findAllBooks(Pageable pageable) {
+        return this.findAll(pageable);
     }
 
     @Override
-    default List<Book> findAllFreeBooks() {
-        return this.findAllByPriceEquals(BigDecimal.ZERO);
+    default Page<Book> findAllFreeBooks(Pageable pageable) {
+        return this.findAllByPriceEquals(BigDecimal.ZERO, pageable);
     }
 
     @Override
-    default List<Book> findAllPaidBooks() {
-        return this.findAllByPriceGreaterThan(BigDecimal.ZERO);
+    default Page<Book> findAllPaidBooks(Pageable pageable) {
+        return this.findAllByPriceGreaterThan(BigDecimal.ZERO, pageable);
     }
 
     @Override
-    default List<Book> findAllByName(String name) {
-        return this.findAllByNameContaining(name);
+    default Page<Book> findAllByName(String name, Pageable pageable) {
+        return this.findAllByNameContaining(name, pageable);
     }
 
     @Override
-    default List<Book> findAllWithCategory(BookCategory category) {
-        return this.findAllByCategory(category);
+    default Page<Book> findAllWithCategory(BookCategory category, Pageable pageable) {
+        return this.findAllByCategory(category, pageable);
     }
 
     @Override

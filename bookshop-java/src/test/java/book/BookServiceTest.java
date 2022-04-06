@@ -5,6 +5,7 @@ import org.bookstore.book.BookCategory;
 import org.bookstore.book.BookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -70,11 +71,11 @@ class BookServiceTest {
         bookService.addBook(book);
         bookService.addBook(book2);
         // when
-        var result = bookService.findAllBooks();
+        var result = bookService.findAllBooks(PageRequest.of(10,10));
         // then
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0)).isEqualTo(book);
-        assertThat(result.get(1)).isEqualTo(book2);
+        assertThat(result.getContent().size()).isEqualTo(2);
+        assertThat(result.getContent().get(0)).isEqualTo(book);
+        assertThat(result.getContent().get(1)).isEqualTo(book2);
     }
 
     @Test
@@ -85,10 +86,10 @@ class BookServiceTest {
         bookService.addBook(book);
         bookService.addBook(book2);
         // when
-        var result = bookService.findAllFreeBooks();
+        var result = bookService.findAllFreeBooks(PageRequest.of(10,10));
         // then
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0)).isEqualTo(book2);
+        assertThat(result.getContent().size()).isEqualTo(1);
+        assertThat(result.getContent().get(0)).isEqualTo(book2);
     }
 
     @Test
@@ -99,10 +100,10 @@ class BookServiceTest {
         bookService.addBook(book);
         bookService.addBook(book2);
         // when
-        var result = bookService.findAllPaidBooks();
+        var result = bookService.findAllPaidBooks(PageRequest.of(10,10));
         // then
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0)).isEqualTo(book);
+        assertThat(result.getContent().size()).isEqualTo(1);
+        assertThat(result.getContent().get(0)).isEqualTo(book);
     }
 
     @Test
@@ -115,11 +116,11 @@ class BookServiceTest {
         bookService.addBook(book2);
         bookService.addBook(book3);
         // when
-        var result = bookService.findAllByName("Book");
+        var result = bookService.findAllByName("Book", PageRequest.of(10,10));
         // then
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0).getName()).isEqualTo("Book1");
-        assertThat(result.get(1).getName()).isEqualTo("Book2");
+        assertThat(result.getContent().size()).isEqualTo(2);
+        assertThat(result.getContent().get(0).getName()).isEqualTo("Book1");
+        assertThat(result.getContent().get(1).getName()).isEqualTo("Book2");
     }
 
     @Test
@@ -130,10 +131,10 @@ class BookServiceTest {
         bookService.addBook(book);
         bookService.addBook(book2);
         // when
-        var result = bookService.findAllByCategory(BookCategory.DRAMA);
+        var result = bookService.findAllByCategory(BookCategory.DRAMA, PageRequest.of(10,10));
         // then
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0)).isEqualTo(book);
+        assertThat(result.getContent().size()).isEqualTo(1);
+        assertThat(result.getContent().get(0)).isEqualTo(book);
 
     }
     @Test
@@ -141,21 +142,12 @@ class BookServiceTest {
         // given
         Book book = new Book(1L,"Book1", "Desc1", BookCategory.DRAMA, BigDecimal.ONE);
         bookService.addBook(book);
-        bookService.deleteBook(book);
         // when
-        var result = bookService.findAllBooks();
-        // then
-        assertThat(result).isEqualTo(List.of());
-    }
-
-    @Test
-    public void deleteBook_ThrowsRuntimeException() {
-        // given
-        Book book = new Book(1L,"Book1", "Desc1", BookCategory.DRAMA, BigDecimal.ONE);
+        var foundBook = bookService.findBookById(1L);
         bookService.deleteBook(book);
-        // when
         var exception = catchThrowable(() -> bookService.findBookById(1L));
         // then
+        assertThat(foundBook).isEqualTo(book);
         assertThat(exception).isInstanceOf(RuntimeException.class);
     }
 }
