@@ -54,50 +54,50 @@ public class BookController {
     }
 
     @GetMapping
-    ResponseEntity<List<Book>> findAllBooks(
+    ResponseEntity<Page<Book>> findAllBooks(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
         ) {
         Pageable paging = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookService.findAllBooks(paging).getContent());
+        return ResponseEntity.ok(bookService.findAllBooks(paging));
     }
 
     @GetMapping("/free")
-    ResponseEntity<List<Book>> findAllFreeBooks(
+    ResponseEntity<Page<Book>> findAllFreeBooks(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
     ) {
         Pageable paging = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookService.findAllFreeBooks(paging).getContent());
+        return ResponseEntity.ok(bookService.findAllFreeBooks(paging));
     }
 
     @GetMapping("/paid")
-    ResponseEntity<List<Book>> findAllPaidBooks(
+    ResponseEntity<Page<Book>> findAllPaidBooks(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
     ) {
         Pageable paging = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookService.findAllPaidBooks(paging).getContent());
+        return ResponseEntity.ok(bookService.findAllPaidBooks(paging));
     }
 
     @GetMapping("/name/{name}")
-    ResponseEntity<List<Book>> findAllByName(
+    ResponseEntity<Page<Book>> findAllByName(
             @PathVariable String name,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
         ) {
         Pageable paging = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookService.findAllByName(name, paging).getContent());
+        return ResponseEntity.ok(bookService.findAllByName(name, paging));
     }
 
     @GetMapping("/category/{category}")
-    ResponseEntity<List<Book>> findAllByCategory(
+    ResponseEntity<Page<Book>> findAllByCategory(
             @PathVariable BookCategory category,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
         ) {
         Pageable paging = PageRequest.of(page, size);
-        return ResponseEntity.ok(bookService.findAllByCategory(category, paging).getContent());
+        return ResponseEntity.ok(bookService.findAllByCategory(category, paging));
     }
 
     @DeleteMapping("/{id}")

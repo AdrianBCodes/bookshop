@@ -8,6 +8,8 @@ import { CreateBookComponent } from './create-book/create-book.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

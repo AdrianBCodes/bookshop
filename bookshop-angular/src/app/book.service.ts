@@ -12,8 +12,9 @@ export class BookService {
 
   constructor(private httpClient: HttpClient){}
 
-  getBooksList(): Observable<Book[]>{
-    return this.httpClient.get<Book[]>(this.baseURL);
+  getBooksList(request): Observable<Book[]>{
+    const params = request;
+    return this.httpClient.get<Book[]>(this.baseURL, {params});
   }
 
   createBook(book: Book): Observable<Object>{

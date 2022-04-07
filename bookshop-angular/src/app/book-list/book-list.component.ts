@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from '../book';
 import { BookService } from '../book.service';
+import { PageEvent } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-book-list',
@@ -11,19 +13,29 @@ import { BookService } from '../book.service';
 export class BookListComponent implements OnInit {
 
   public books: Book[];
+  public totalElements: number = 0;
+  public request = {};
 
   constructor(private bookService: BookService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getBooks();
+    this.getBooks({ page: "0", size: "3" });
   }
 
-  private getBooks(){
-    this.bookService.getBooksList().subscribe(data => {
-      this.books = data;
+  private getBooks(request){
+    this.bookService.getBooksList(request).subscribe(data => {
+      this.books = data['content'];
+      this.totalElements = data['totalElements'];
     })
   }
+
+  nextPage(event: PageEvent) {
+    
+    this.request['page'] = event.pageIndex.toString();
+    this.request['size'] = event.pageSize.toString();
+    this.getBooks(this.request);
+}
 
   bookDetails(id: number){
     this.router.navigate(['book-details', id]);
@@ -36,7 +48,7 @@ export class BookListComponent implements OnInit {
   deleteBook(id:number){
       this.bookService.deleteBook(id).subscribe(data => {
         console.log(data);
-        this.getBooks();
+        this.getBooks(this.request);
       });
   }
 
