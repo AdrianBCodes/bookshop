@@ -1,10 +1,8 @@
 package org.bookstore.book;
 
-import org.bookstore.book.exceptions.NotFoundException;
+import org.bookstore.exceptions.NotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 public class BookService {
     private final BookRepository bookRepository;
