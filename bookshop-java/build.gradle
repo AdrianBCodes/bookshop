@@ -4,36 +4,45 @@
 
 plugins {
     id 'java-library'
-    id 'maven-publish'
-}
-
-repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
-}
-
-dependencies {
-    api 'org.springframework.boot:spring-boot-starter:2.6.2'
-    api 'org.springframework.boot:spring-boot-starter-web:2.6.2'
-    api 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.1'
-    api 'com.auth0:java-jwt:3.18.3'
-    runtimeOnly 'org.postgresql:postgresql:42.3.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
-    testImplementation 'org.assertj:assertj-core:3.11.1'
-    compileOnly 'org.projectlombok:lombok:1.18.22'
+    id 'org.springframework.boot' version '2.7.11'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'org.bookshop'
-version = '1.0-SNAPSHOT'
-description = 'bookshop'
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+version = 'v1'
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(18)
     }
 }
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.9.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+
+
+
