@@ -14,5 +14,5 @@ public interface BookRepository {
     Page<Book> findAllByName(String name, Pageable pageable);
     Page<Book> findAllWithCategory(BookCategory category, Pageable pageable);
     Long saveBook(Book entity);
-    void deleteBook(Book entity);
+    void saveAllBooks(List<Book> entities);
 }
