@@ -9,10 +9,6 @@ import java.util.Optional;
 public interface BookRepository {
     Optional<Book> findBookById(Long id);
     Page<Book> findAllBooks(Pageable page);
-    Page<Book> findAllFreeBooks(Pageable pageable);
-    Page<Book> findAllPaidBooks(Pageable pageable);
-    Page<Book> findAllByName(String name, Pageable pageable);
-    Page<Book> findAllWithCategory(BookCategory category, Pageable pageable);
-    Long saveBook(Book entity);
+    String saveBook(Book entity);
     void saveAllBooks(List<Book> entities);
 }

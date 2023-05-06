@@ -1,20 +1,21 @@
 package org.bookstore.book;
 
-import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "books")
+@Document(collection = "books")
 public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+
+    @MongoId
+    String id;
     String name;
     String description;
     BookCategory category;
     BigDecimal price;
 
-    public Book(Long id, String name, String description, BookCategory category, BigDecimal price) {
+    public Book(String id, String name, String description, BookCategory category, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -33,23 +34,11 @@ public class Book {
 
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public BookCategory getCategory() {
-        return category;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
     }
 }
