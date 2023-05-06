@@ -28,4 +28,8 @@ public interface SqlBookRepository extends BookRepository, JpaRepository<Book, L
         return entity.getId();
     }
 
+    @Override
+    default void saveAllBooks(List<Book> entities){
+        this.saveAll(entities);
+    }
 }
