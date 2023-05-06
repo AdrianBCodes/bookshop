@@ -3,7 +3,7 @@ package org.bookstore.book;
 import java.math.BigDecimal;
 
 public class BookBuilder {
-    private Long id;
+    private String id;
     private String name;
     private String description;
     private BookCategory category;
@@ -13,7 +13,7 @@ public class BookBuilder {
         return new BookBuilder();
     }
 
-    public BookBuilder withId(Long id){
+    public BookBuilder withId(String id){
         this.id = id;
         return this;
     }

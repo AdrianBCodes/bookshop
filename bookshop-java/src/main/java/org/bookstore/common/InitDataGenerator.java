@@ -15,7 +15,7 @@ public class InitDataGenerator {
         IntStream.rangeClosed(1, number)
                 .forEach(i -> books.add(
                         BookBuilder.builder()
-                                .withId((long) i)
+                                .withId(String.valueOf(i))
                                 .withName(String.format("Book%d", i))
                                 .withDescription(String.format("Description%d", i))
                                 .withPrice(BigDecimal.valueOf(i))

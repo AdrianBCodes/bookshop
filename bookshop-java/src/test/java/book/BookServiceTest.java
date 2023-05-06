@@ -1,7 +1,6 @@
 package book;
 
 import org.bookstore.book.Book;
-import org.bookstore.book.BookCategory;
 import org.bookstore.book.BookRepository;
 import org.bookstore.book.BookService;
 import org.bookstore.exceptions.NotFoundException;
@@ -11,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,8 +34,8 @@ class BookServiceTest {
     @Test
     public void findById() {
         // given
-        Book book = new Book(1L,"Book1", "Desc1", BookCategory.DRAMA, BigDecimal.ONE);
-        given(bookRepositoryMock.saveBook(book)).willReturn(1L);
+        Book book = BookExample.getBook1();
+        given(bookRepositoryMock.saveBook(book)).willReturn("1");
         given(bookRepositoryMock.findBookById(1L)).willReturn(Optional.of(book));
         bookRepositoryMock.saveBook(book);
         // when
@@ -60,8 +58,8 @@ class BookServiceTest {
     @Test
     public void findAll() {
         // given
-        Book book = new Book(1L,"Book1", "Desc1", BookCategory.DRAMA, BigDecimal.ONE);
-        Book book2 = new Book(2L,"Book2", "Desc2", BookCategory.DRAMA, BigDecimal.ONE);
+        Book book = BookExample.getBook1();
+        Book book2 = BookExample.getBook2();
         given(bookRepositoryMock.findAllBooks(PageRequest.of(0, 5)))
                 .willReturn(new PageImpl<>(List.of(book, book2), PageRequest.of(0, 5), 2));
         // when
