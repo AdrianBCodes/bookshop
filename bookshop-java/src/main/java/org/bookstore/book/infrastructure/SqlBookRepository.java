@@ -31,33 +31,13 @@ public interface SqlBookRepository extends BookRepository, JpaRepository<Book, L
     }
 
     @Override
-    default Page<Book> findAllFreeBooks(Pageable pageable) {
-        return this.findAllByPriceEquals(BigDecimal.ZERO, pageable);
-    }
-
-    @Override
-    default Page<Book> findAllPaidBooks(Pageable pageable) {
-        return this.findAllByPriceGreaterThan(BigDecimal.ZERO, pageable);
-    }
-
-    @Override
-    default Page<Book> findAllByName(String name, Pageable pageable) {
-        return this.findAllByNameContaining(name, pageable);
-    }
-
-    @Override
-    default Page<Book> findAllWithCategory(BookCategory category, Pageable pageable) {
-        return this.findAllByCategory(category, pageable);
-    }
-
-    @Override
     default Long saveBook(Book entity) {
         this.save(entity);
         return entity.getId();
     }
 
     @Override
-    default void deleteBook(Book entity) {
-        this.delete(entity);
+    default void saveAllBooks(List<Book> entities){
+        this.saveAll(entities);
     }
 }
