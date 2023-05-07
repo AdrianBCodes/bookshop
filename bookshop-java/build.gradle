@@ -25,14 +25,17 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://jitpack.io'
+    }
 }
 
 dependencies {
-    implementation 'org.springframework.data:spring-data-mongodb'
-    implementation 'org.mongodb:mongo-java-driver:3.12.8'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'com.github.cloudyrock.mongock:mongock-bom:4.3.8'
+    implementation 'com.github.cloudyrock.mongock:mongock-spring-v5:4.3.8'
+    implementation 'com.github.cloudyrock.mongock:mongodb-springdata-v3-driver:4.3.8'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.mockito:mockito-core:5.2.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.2.0'
