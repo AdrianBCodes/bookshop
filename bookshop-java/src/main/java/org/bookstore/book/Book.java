@@ -1,6 +1,8 @@
 package org.bookstore.book;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.math.BigDecimal;
@@ -13,6 +15,7 @@ public class Book {
     String name;
     String description;
     BookCategory category;
+    @Field(targetType = FieldType.DECIMAL128)
     BigDecimal price;
 
     public Book(String id, String name, String description, BookCategory category, BigDecimal price) {
