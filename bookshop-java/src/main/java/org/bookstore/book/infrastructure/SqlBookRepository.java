@@ -1,5 +1,6 @@
 package org.bookstore.book.infrastructure;
 
+import com.mongodb.lang.NonNull;
 import org.bookstore.book.Book;
 import org.bookstore.book.BookRepository;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,8 @@ import java.util.Optional;
 
 
 public interface SqlBookRepository extends BookRepository, MongoRepository<Book, Long> {
-    Page<Book> findAll(Pageable pageable);
+    @NonNull
+    Page<Book> findAll(@NonNull Pageable pageable);
 
     @Override
     default Optional<Book> findBookById(Long id){

@@ -44,4 +44,15 @@ public class Book {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Book{id='%s', name='%s', description='%s', category=%s, price=%.2f",
+                id,
+                name,
+                description,
+                category.toString(),
+                price);
+    }
 }
