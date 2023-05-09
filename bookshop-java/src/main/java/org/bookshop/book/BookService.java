@@ -1,6 +1,6 @@
-package org.bookstore.book;
+package org.bookshop.book;
 
-import org.bookstore.exceptions.NotFoundException;
+import org.bookshop.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;

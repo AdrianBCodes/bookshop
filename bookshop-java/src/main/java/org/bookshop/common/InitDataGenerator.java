@@ -1,8 +1,8 @@
-package org.bookstore.common;
+package org.bookshop.common;
 
-import org.bookstore.book.Book;
-import org.bookstore.book.BookBuilder;
-import org.bookstore.book.BookCategory;
+import org.bookshop.book.Book;
+import org.bookshop.book.BookBuilder;
+import org.bookshop.book.BookCategory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

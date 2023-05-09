@@ -1,4 +1,4 @@
-package org.bookstore.configuration;
+package org.bookshop.configuration;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -33,6 +33,6 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Override
     public Collection getMappingBasePackages() {
-        return Collections.singleton("org.bookstore");
+        return Collections.singleton("org.bookshop");
     }
 }

@@ -1,4 +1,4 @@
-package org.bookstore.book;
+package org.bookshop.book;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;

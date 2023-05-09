@@ -1,4 +1,4 @@
-package org.bookstore.configuration;
+package org.bookshop.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-@ComponentScan(basePackages = "org.bookstore.configuration")
+@ComponentScan(basePackages = "org.bookshop.configuration")
 public class SwaggerConfig {
 
     @Bean
@@ -26,7 +26,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
             .select()
-            .apis(RequestHandlerSelectors.basePackage("org.bookstore.controller"))
+            .apis(RequestHandlerSelectors.basePackage("org.bookshop.controller"))
             .paths(PathSelectors.any())
             .build()
             .apiInfo(apiInfo());

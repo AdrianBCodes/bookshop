@@ -1,4 +1,4 @@
-package org.bookstore.exceptions;
+package org.bookshop.exceptions;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message){

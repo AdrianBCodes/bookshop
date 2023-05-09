@@ -1,7 +1,7 @@
-package org.bookstore.configuration;
+package org.bookshop.configuration;
 
-import org.bookstore.book.BookService;
-import org.bookstore.book.infrastructure.SqlBookRepository;
+import org.bookshop.book.BookService;
+import org.bookshop.book.infrastructure.SqlBookRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
