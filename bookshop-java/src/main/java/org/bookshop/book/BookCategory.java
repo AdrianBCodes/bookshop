@@ -1,4 +1,4 @@
-package org.bookstore.book;
+package org.bookshop.book;
 
 public enum BookCategory {
     ACTION,

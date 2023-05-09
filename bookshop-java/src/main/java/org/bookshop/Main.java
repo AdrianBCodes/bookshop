@@ -1,4 +1,4 @@
-package org.bookstore;
+package org.bookshop;
 
 
 import com.github.cloudyrock.spring.v5.EnableMongock;

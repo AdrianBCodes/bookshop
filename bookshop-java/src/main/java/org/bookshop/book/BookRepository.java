@@ -1,4 +1,4 @@
-package org.bookstore.book;
+package org.bookshop.book;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

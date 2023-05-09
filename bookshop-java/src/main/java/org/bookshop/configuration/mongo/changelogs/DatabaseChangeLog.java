@@ -1,10 +1,10 @@
-package org.bookstore.configuration.mongo.changelogs;
+package org.bookshop.configuration.mongo.changelogs;
 
 import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
-import org.bookstore.book.BookRepository;
-import org.bookstore.common.InitDataGenerator;
+import org.bookshop.book.BookRepository;
+import org.bookshop.common.InitDataGenerator;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.CollectionOptions;
 import org.springframework.data.mongodb.core.schema.JsonSchemaProperty;

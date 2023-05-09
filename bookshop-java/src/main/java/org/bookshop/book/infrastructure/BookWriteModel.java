@@ -1,6 +1,6 @@
-package org.bookstore.book.infrastructure;
+package org.bookshop.book.infrastructure;
 
-import org.bookstore.book.BookCategory;
+import org.bookshop.book.BookCategory;
 
 
 import java.math.BigDecimal;

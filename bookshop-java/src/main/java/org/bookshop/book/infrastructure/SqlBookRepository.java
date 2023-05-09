@@ -1,8 +1,8 @@
-package org.bookstore.book.infrastructure;
+package org.bookshop.book.infrastructure;
 
 import com.mongodb.lang.NonNull;
-import org.bookstore.book.Book;
-import org.bookstore.book.BookRepository;
+import org.bookshop.book.Book;
+import org.bookshop.book.BookRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;

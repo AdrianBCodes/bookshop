@@ -1,9 +1,9 @@
 package book;
 
-import org.bookstore.book.Book;
-import org.bookstore.book.BookRepository;
-import org.bookstore.book.BookService;
-import org.bookstore.exceptions.NotFoundException;
+import org.bookshop.book.Book;
+import org.bookshop.book.BookRepository;
+import org.bookshop.book.BookService;
+import org.bookshop.exceptions.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

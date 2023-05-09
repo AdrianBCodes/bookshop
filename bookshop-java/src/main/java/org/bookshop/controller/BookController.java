@@ -1,9 +1,9 @@
-package org.bookstore.controller;
+package org.bookshop.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.bookstore.book.Book;
-import org.bookstore.book.BookService;
+import org.bookshop.book.Book;
+import org.bookshop.book.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
