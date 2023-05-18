@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Book } from '../book';
+import { Book } from '../../book';
 import { BookService } from '../book.service';
 import { PageEvent } from '@angular/material/paginator';
 
@@ -12,7 +12,7 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class BookListComponent implements OnInit {
 
-  public books: Book[];
+  public books: Book[] = [];
   public totalElements: number = 0;
   public request = {};
 
@@ -31,7 +31,6 @@ export class BookListComponent implements OnInit {
   }
 
   nextPage(event: PageEvent) {
-    
     this.request['page'] = event.pageIndex.toString();
     this.request['size'] = event.pageSize.toString();
     this.getBooks(this.request);
@@ -40,17 +39,4 @@ export class BookListComponent implements OnInit {
   bookDetails(id: number){
     this.router.navigate(['book-details', id]);
   }
-
-  updateBook(id: number){
-    this.router.navigate(['update-book', id]);
-  }
-
-  deleteBook(id:number){
-      this.bookService.deleteBook(id).subscribe(data => {
-        console.log(data);
-        this.getBooks(this.request);
-      });
-  }
-
-
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Book } from '../book';
+import { Book } from '../../book';
 import { BookService } from '../book.service';
 
 @Component({
@@ -18,7 +18,6 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-
     this.bookService.getBookById(this.id).subscribe(data => {
       this.book = data;
     })
