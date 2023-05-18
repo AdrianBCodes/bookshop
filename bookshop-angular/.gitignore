@@ -5,6 +5,8 @@
 
 # dependencies
 /node_modules
+npm-debug.log
+yarn-error.log
 
 # IDEs and editors
 /.idea
@@ -23,6 +25,7 @@
 !.vscode/extensions.json
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
