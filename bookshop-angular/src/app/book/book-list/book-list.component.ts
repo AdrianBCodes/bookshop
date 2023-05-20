@@ -20,7 +20,7 @@ export class BookListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getBooks({ page: "0", size: "3" });
+    this.getBooks({ page: "0", size: "5" });
   }
 
   private getBooks(request){

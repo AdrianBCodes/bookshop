@@ -1,0 +1,19 @@
+.card {
+    border-right: 1px solid #eee;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    float: left;
+    width: 19.5%;
+}
+
+.last-card {
+    border-right: none;
+}
+.price {
+    color: grey;
+}
+
+.containter {
+    width: 100%;
+}

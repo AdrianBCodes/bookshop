@@ -1,26 +1,9 @@
-<h2>Book List</h2>
-
-
-<table class = "table table-striped">
-    <thead>
-        <tr>
-            <th> Name</th>
-            <th> Description</th>
-            <th> Category</th>
-            <th> Price</th>
-            <th> Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let book of books">
-            <td>{{ book.name}} </td>    
-            <td>{{ book.description}} </td>
-            <td>{{ book.category}} </td>
-            <td>{{ book.price}} </td>
-            <td>
-                <button (click)="bookDetails(book.id)" class="btn btn-primary mx-1" > View</button>
-            </td>
-        </tr>
-    </tbody>
-    <mat-paginator [pageSizeOptions]="[3, 6, 9, 12, 15]" [pageSize]="3" [length]="totalElements" (page)="nextPage($event)"> </mat-paginator>
-</table>
+<div class="container">
+    <div *ngFor="let book of books; let last = last" [ngClass]="{'card': true, 'last-card': last}">
+        <img src="../../../assets/images/default_book_avatar.png" alt="Avatar" style="width:100%; max-width: 80px;">
+        <h4><b>{{book.name}}</b></h4>
+        <p>{{book.description}}</p>
+        <p>{{book.category}}</p>
+        <p class="price">{{book.price}}</p>
+    </div>
+</div>
