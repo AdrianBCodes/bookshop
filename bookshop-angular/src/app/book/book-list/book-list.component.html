@@ -1,0 +1,9 @@
+<div class="container">
+    <div *ngFor="let book of books; let last = last" [ngClass]="{'card': true, 'last-card': last}">
+        <img src="../../../assets/images/default_book_avatar.png" alt="Avatar" style="width:100%; max-width: 80px;">
+        <h4><b>{{book.name}}</b></h4>
+        <p>{{book.description}}</p>
+        <p>{{book.category}}</p>
+        <p class="price">{{book.price}}</p>
+    </div>
+</div>
