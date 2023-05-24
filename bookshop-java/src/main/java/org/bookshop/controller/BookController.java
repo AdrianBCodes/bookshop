@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.bookshop.book.Book;
 import org.bookshop.book.BookService;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,8 +26,8 @@ public class BookController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Find a book by Id", response = Book.class)
-    ResponseEntity<Book> findBookById(@PathVariable Long id) {
-        logger.info("Sent request to find book by id: {}", id);
+    ResponseEntity<Book> findBookById(@PathVariable ObjectId id) {
+        logger.info("Sent request to find book by id: {}", id.toString());
         Book book = bookService.findBookById(id);
         logger.info("Returning book: {}", book);
         return ResponseEntity.ok(book);
