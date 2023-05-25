@@ -4,6 +4,7 @@ import org.bookshop.book.Book;
 import org.bookshop.book.BookRepository;
 import org.bookshop.book.BookService;
 import org.bookshop.exceptions.NotFoundException;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -35,22 +36,23 @@ class BookServiceTest {
     public void findById() {
         // given
         Book book = BookExample.getBook1();
-        given(bookRepositoryMock.saveBook(book)).willReturn("1");
-        given(bookRepositoryMock.findBookById(1L)).willReturn(Optional.of(book));
+        given(bookRepositoryMock.saveBook(book)).willReturn(book.getId());
+        given(bookRepositoryMock.findBookById(book.getId())).willReturn(Optional.of(book));
         bookRepositoryMock.saveBook(book);
         // when
-        var result = bookService.findBookById(1L);
+        var result = bookService.findBookById(book.getId());
         // then
-        then(bookRepositoryMock).should().findBookById(1L);
+        then(bookRepositoryMock).should().findBookById(book.getId());
         assertThat(result).isEqualTo(book);
     }
 
     @Test
     public void findById_ThrowsException() {
         // given
-        given(bookRepositoryMock.findBookById(1L)).willReturn(Optional.empty());
+        ObjectId bookId = new ObjectId("000000000000000000000001");
+        given(bookRepositoryMock.findBookById(bookId)).willReturn(Optional.empty());
         // when
-        var exception = catchThrowable( () -> bookService.findBookById(1L));
+        var exception = catchThrowable( () -> bookService.findBookById(bookId));
         // then
         assertThat(exception).isInstanceOf(NotFoundException.class);
     }
