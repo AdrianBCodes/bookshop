@@ -4,11 +4,16 @@ import com.github.cloudyrock.mongock.ChangeLog;
 import com.github.cloudyrock.mongock.ChangeSet;
 import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
 import org.bookshop.book.BookRepository;
+import org.bookshop.cart.CartRepository;
+import org.bookshop.cart.infrastructure.CartEntity;
 import org.bookshop.common.InitDataGenerator;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.CollectionOptions;
 import org.springframework.data.mongodb.core.schema.JsonSchemaProperty;
 import org.springframework.data.mongodb.core.schema.MongoJsonSchema;
+
+import java.util.ArrayList;
 
 @ChangeLog
 public class DatabaseChangeLog {
@@ -41,5 +46,10 @@ public class DatabaseChangeLog {
                         JsonSchemaProperty.decimal128("price"))
                 .build();
         template.executeCommand(new Document("collMod", "books").append("validator", schema.toDocument()));
+    }
+
+    @ChangeSet(order = "004", id = "addTestCart", author = "AdrianBCodes")
+    public void addTestCart(CartRepository cartRepository){
+        cartRepository.saveCart(new CartEntity(new ObjectId("000000000000000000000001"), new ArrayList<>()));
     }
 }
