@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Book } from '../book';
+import { Book } from './book';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class BookService {
     return this.httpClient.get<Book[]>(this.baseURL, {params});
   }
 
-  getBookById(id: number): Observable<Book>{
+  getBookById(id: string): Observable<Book>{
     return this.httpClient.get<Book>(this.baseURL + '/' + id)
   }
 

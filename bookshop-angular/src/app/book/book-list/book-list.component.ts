@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Book } from '../../book';
+import { Book } from '../book';
 import { BookService } from '../book.service';
 import { PageEvent } from '@angular/material/paginator';
+import { CartService } from 'src/app/cart/cart.service';
+import { lastValueFrom } from 'rxjs';
 
 
 @Component({
@@ -17,6 +19,7 @@ export class BookListComponent implements OnInit {
   public request = {};
 
   constructor(private bookService: BookService,
+    private cartService: CartService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -36,7 +39,12 @@ export class BookListComponent implements OnInit {
     this.getBooks(this.request);
 }
 
-  bookDetails(id: number){
-    this.router.navigate(['book-details', id]);
+  navigateToBook(id: string){
+    this.router.navigate(['books', id]);
+  }
+
+  async addToCart(id: string) {
+    const book = await lastValueFrom(this.bookService.getBookById(id))
+    this.cartService.addToCart(book);
   }
 }
