@@ -13,4 +13,10 @@ public interface SqlUserRepository extends UserRepository, MongoRepository<User,
     default Optional<User> getUserById(ObjectId userId){
         return this.findById(userId);
     }
+
+    @Override
+    default ObjectId saveUser(User user) {
+        User userEntity = this.save(user);
+        return userEntity.getId();
+    }
 }

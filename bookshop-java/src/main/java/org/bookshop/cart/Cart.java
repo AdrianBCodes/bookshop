@@ -1,9 +1,9 @@
 package org.bookshop.cart;
 
 import org.bookshop.cart.cartItem.CartItem;
-import org.bookshop.cart.dto.CartDTO;
 import org.bookshop.user.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -24,25 +24,24 @@ public class Cart {
         return items;
     }
 
-    public CartDTO toDTO(){
-        return new CartDTO(
-                user.getId(),
-                items
-        );
+
+    public void addItem(CartItem item) {
+        if(items.contains(item))
+            return;
+        items.add(item);
     }
 
-//    public void addItem(CartItem item) {
-//        if(items.contains(item))
-//            item.plusQuantity();
-//        else
-//            items.add(item);
-//    }
-//
-//    public BigDecimal getTotalPrice(){
-//        return items
-//                .stream()
-//                .map(CartItem::getTotalPrice)
-//                .reduce(BigDecimal::add)
-//                .orElse(BigDecimal.ZERO);
-//    }
+    public void removeItem(CartItem item) {
+        if(!items.contains(item))
+            throw new IllegalArgumentException("Cannot remove item. It is not in Cart.");
+        items.remove(item);
+    }
+
+    public BigDecimal getTotalPrice() {
+        return items
+                .stream()
+                .map(CartItem::getTotalPrice)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+    }
 }

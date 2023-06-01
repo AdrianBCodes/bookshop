@@ -9,10 +9,7 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/cart")
@@ -29,7 +26,7 @@ public class CartController {
     @ApiOperation(value = "Get Cart by User Id", response = Cart.class)
     public ResponseEntity<CartDTO> getCartByUserId(@PathVariable ObjectId userId){
         logger.info("Sent request to find cart by user with id: {}", userId.toString());
-        CartDTO cart = cartService.getCartByUserId(userId).toDTO();
+        CartDTO cart = CartDTO.createCartDTO(cartService.getCartByUserId(userId));
         logger.info("Returning cart: {}", cart);
         return ResponseEntity.ok(cart);
     }

@@ -7,13 +7,13 @@ import org.bookshop.book.BookRepository;
 import org.bookshop.cart.CartRepository;
 import org.bookshop.cart.infrastructure.CartEntity;
 import org.bookshop.common.InitDataGenerator;
+import org.bookshop.user.User;
+import org.bookshop.user.UserRepository;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.CollectionOptions;
 import org.springframework.data.mongodb.core.schema.JsonSchemaProperty;
 import org.springframework.data.mongodb.core.schema.MongoJsonSchema;
-
-import java.util.ArrayList;
 
 @ChangeLog
 public class DatabaseChangeLog {
@@ -49,7 +49,12 @@ public class DatabaseChangeLog {
     }
 
     @ChangeSet(order = "004", id = "addTestCart", author = "AdrianBCodes")
-    public void addTestCart(CartRepository cartRepository){
-        cartRepository.saveCart(new CartEntity(new ObjectId("000000000000000000000001"), new ArrayList<>()));
+    public void addTestCart(CartRepository cartRepository, UserRepository userRepository){
+        ObjectId userId = userRepository.saveUser(
+                new User(new ObjectId("000000000000000000000001"))
+        );
+        cartRepository.saveCart(
+                new CartEntity(userId)
+        );
     }
 }
