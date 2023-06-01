@@ -1,4 +1,4 @@
-package org.bookshop.interfaces;
+package org.bookshop.product;
 
 import java.math.BigDecimal;
 

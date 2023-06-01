@@ -4,7 +4,6 @@ import org.bookshop.book.Book;
 import org.bookshop.book.BookRepository;
 import org.bookshop.book.BookService;
 import org.bookshop.exceptions.NotFoundException;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -49,7 +48,7 @@ class BookServiceTest {
     @Test
     public void findById_ThrowsException() {
         // given
-        ObjectId bookId = new ObjectId("000000000000000000000001");
+        String bookId = "Bk1";
         given(bookRepositoryMock.findBookById(bookId)).willReturn(Optional.empty());
         // when
         var exception = catchThrowable( () -> bookService.findBookById(bookId));

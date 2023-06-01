@@ -43,7 +43,7 @@ public class BookDTO {
     @Override
     public String toString() {
         return String.format(
-                "Book{id='%s', name='%s', description='%s', category=%s, price=%.2f}",
+                "Book{id='%s', name='%s', description='%s', category=%s, price=%f}",
                 id,
                 name,
                 description,

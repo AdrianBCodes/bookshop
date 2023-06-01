@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.bookshop.book.Book;
 import org.bookshop.book.BookService;
-import org.bson.types.ObjectId;
+import org.bookshop.book.dto.BookDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -26,22 +26,22 @@ public class BookController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Find a book by Id", response = Book.class)
-    ResponseEntity<Book> findBookById(@PathVariable ObjectId id) {
-        logger.info("Sent request to find book by id: {}", id.toString());
-        Book book = bookService.findBookById(id);
+    ResponseEntity<BookDTO> findBookById(@PathVariable String id) {
+        logger.info("Sent request to find book by id: {}", id);
+        BookDTO book = bookService.findBookById(id).toDto();
         logger.info("Returning book: {}", book);
         return ResponseEntity.ok(book);
     }
 
     @GetMapping
     @ApiOperation(value = "Find all books paged", response = Page.class)
-    ResponseEntity<Page<Book>> findAllBooks(
+    ResponseEntity<Page<BookDTO>> findAllBooks(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
         ) {
         Pageable paging = PageRequest.of(page, size);
         logger.info("Sent request to find all books with paging: {}", paging);
-        Page<Book> books = bookService.findAllBooks(paging);
+        Page<BookDTO> books = bookService.findAllBooks(paging).map(Book::toDto);
         logger.info("Returning {} books with paging {}", books.getTotalElements(), paging);
         return ResponseEntity.ok(books);
     }

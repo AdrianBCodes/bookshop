@@ -1,7 +1,6 @@
 package org.bookshop.book;
 
 import org.bookshop.exceptions.NotFoundException;
-import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -15,11 +14,11 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public Book findBookById(ObjectId id){
+    public Book findBookById(String id){
         logger.info("Searching for book with id: {}", id);
         return bookRepository.findBookById(id)
                 .orElseThrow(() -> {
-                    logger.warn("Book with id: {} not found", id);
+                    logger.error("Book with id: {} not found", id);
                     return new NotFoundException(String.format("Book with id: %s not found", id));
                 });
     }
