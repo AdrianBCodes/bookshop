@@ -44,7 +44,6 @@ export class BookListComponent implements OnInit {
   }
 
   async addToCart(id: string) {
-    const book = await lastValueFrom(this.bookService.getBookById(id))
-    this.cartService.addToCart(book);
+    this.cartService.addToCart(id).subscribe();
   }
 }

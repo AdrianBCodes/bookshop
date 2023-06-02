@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Book } from './book';
 import { environment } from 'src/environments/environment';
 
@@ -13,13 +13,23 @@ export class BookService {
 
   constructor(private httpClient: HttpClient){}
 
-  getBooksList(request): Observable<Book[]>{
-    const params = request;
-    return this.httpClient.get<Book[]>(this.baseURL, {params});
+  getBooksList(request): Observable<Book[]> {
+    const params = new HttpParams({ fromObject: request });
+    return this.httpClient.get<Book[]>(this.baseURL, { params }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        const errorMessage = `Error occurred while retrieving books. Request: ${this.baseURL}?${params.toString()}`;
+        return throwError(() => new Error(errorMessage));
+      })
+    );
   }
 
-  getBookById(id: string): Observable<Book>{
-    return this.httpClient.get<Book>(this.baseURL + '/' + id)
+  getBookById(id: string): Observable<Book> {
+    return this.httpClient.get<Book>(`${this.baseURL}/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        const errorMessage = `Error occurred while retrieving the book. Request: ${this.baseURL}/${id}`;
+        return throwError(() => new Error(errorMessage));
+      })
+    );
   }
 
 }

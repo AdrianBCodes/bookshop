@@ -1,37 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Cart } from './cart';
-import { CartItem } from './cartItem';
-import Big from 'big.js';
 import { Product } from '../interfaces/product';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { CartItem } from './cartItem';
+import { CartItemWriteModel } from './cartItemWriteModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  cart: Cart = {
-    id: '1',
-    userId: '1',
-    items: [{
-      product: {
-        id: '1',
-        name: 'productName1',
-        price: new Big(100.98)
-      },
-      quantity: 10
-    }]
-  };
+  private baseURL = environment.baseUrl + "/cart";
 
-  constructor() { }
+  constructor(private httpClient: HttpClient){}
 
-  getCart(){
-    return this.cart;
+  getCart(id: string) : Observable<Cart>{
+    return this.httpClient.get<Cart>(`${this.baseURL}/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        const errorMessage = `Error occurred while retrieving cart. Request: ${this.baseURL}/${id}`;
+        return throwError(() => new Error(errorMessage));
+      })
+    );
   }
 
-  addToCart(productToAdd: Product){
-    this.cart.items.push({
-      product: productToAdd,
-      quantity: 1
-    });
+  addToCart(productId: string) : Observable<void>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+  return this.httpClient.put<void>(this.baseURL, new CartItemWriteModel('000000000000000000000001', productId), httpOptions).pipe(
+    catchError((error: HttpErrorResponse) => {
+      const errorMessage = `Error occurred while adding item to cart. Request: ${this.baseURL}`;
+      console.log(error.message);
+      return throwError(() => new Error(errorMessage));
+    })
+  );
   }
 }

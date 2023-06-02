@@ -10,16 +10,16 @@ import { CartService } from './cart.service';
 })
 export class CartComponent implements OnInit {
   
-  cart: Cart;
+  cart: Cart = new Cart({ id: '', userId: '', items: [] });
 
   constructor(private cartService: CartService) {
   }
   
   
   ngOnInit(): void {
-    if(this.cart == undefined){
-      this.cart = this.cartService.getCart();
-    }
+      this.cartService.getCart('000000000000000000000001')
+      .subscribe(data => 
+        this.cart = data);
   }
 
   minusQuantity(item: CartItem){
