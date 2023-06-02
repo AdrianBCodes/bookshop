@@ -1,5 +1,6 @@
 package org.bookshop.cart.cartItem;
 
+import org.bookshop.cart.cartItem.infrastructure.CartItemEntity;
 import org.bookshop.product.Product;
 import org.bookshop.product.ProductService;
 
@@ -17,10 +18,15 @@ public class CartItemProvider {
     }
 
     List<CartItem> getCartItemsByCartId(String id){
-        return cartItemRepository.getCartItemsByCartIt(id)
+        return cartItemRepository.getCartItemsByCartId(id)
                 .stream().map(cartItemEntity -> {
-                    Product product = productService.getProductById(cartItemEntity.getProductId());
+                    Product product = productService.getProductById(cartItemEntity.getId().getProductId());
                     return CartItemMapper.cartItemEntityToDomain(cartItemEntity, product);
                 }).toList();
+    }
+
+    public void addItemToCart(CartItem cartItem) {
+        CartItemEntity toSave = CartItemMapper.cartItemDomainToEntity(cartItem);
+        cartItemRepository.saveCartItem(toSave);
     }
 }

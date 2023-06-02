@@ -16,4 +16,7 @@ public class CartItemService {
     public List<CartItem> getCartItemsByCartId(String cartId){
         return cartItemProvider.getCartItemsByCartId(cartId);
     }
+    public void addItemToCart(CartItem cartItem){
+        cartItemProvider.addItemToCart(cartItem);
+    }
 }

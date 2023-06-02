@@ -1,15 +1,16 @@
 package org.bookshop.cart.dto;
 
 import org.bookshop.cart.Cart;
-import org.bookshop.cart.cartItem.CartItem;
+import org.bookshop.cart.cartItem.dto.CartItemDTO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CartDTO {
     private String userId;
-    private final List<CartItem> items;
+    private final List<CartItemDTO> items;
 
-    public CartDTO(String userId, List<CartItem> items) {
+    public CartDTO(String userId, List<CartItemDTO> items) {
         this.userId = userId;
         this.items = items;
     }
@@ -17,7 +18,7 @@ public class CartDTO {
     public static CartDTO createCartDTO(Cart cart){
         return new CartDTO(
                 cart.getUser().getId().toString(),
-                cart.getItems()
+                cart.getItems().stream().map(CartItemDTO::createCartItemDTO).collect(Collectors.toList())
         );
     }
 
@@ -29,7 +30,7 @@ public class CartDTO {
         this.userId = userId;
     }
 
-    public List<CartItem> getItems() {
+    public List<CartItemDTO> getItems() {
         return items;
     }
 }

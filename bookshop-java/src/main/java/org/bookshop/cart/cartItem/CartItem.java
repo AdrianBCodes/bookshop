@@ -6,29 +6,22 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class CartItem {
-    private final String id;
     private final String cartId;
     private final Product product;
     private int quantity;
 
-    private CartItem(String id, String cartId, Product product, int quantity) {
-        this.id = id;
+    private CartItem(String cartId, Product product, int quantity) {
         this.cartId = cartId;
         this.product = product;
         this.quantity = quantity;
     }
 
-    public static CartItem createCartItem(String id, String cartId, Product product, int quantity){
-        Objects.requireNonNull(id);
+    public static CartItem createCartItem(String cartId, Product product, int quantity){
         Objects.requireNonNull(cartId);
         Objects.requireNonNull(product);
         if(quantity < 1)
             throw new IllegalArgumentException("Quantity cannot be less than 1");
-        return new CartItem(id, cartId, product, quantity);
-    }
-
-    public String getId() {
-        return id;
+        return new CartItem(cartId, product, quantity);
     }
 
     public String getCartId() {

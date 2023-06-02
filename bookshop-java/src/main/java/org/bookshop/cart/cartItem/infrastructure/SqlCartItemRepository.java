@@ -6,12 +6,17 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface SqlCartItemRepository extends CartItemRepository, MongoRepository<CartItemEntity, ObjectId> {
+public interface SqlCartItemRepository extends CartItemRepository, MongoRepository<CartItemEntity, CartItemId> {
 
-    List<CartItemEntity> findByCartId(ObjectId cartId);
+    List<CartItemEntity> findById_CartId(ObjectId cartId);
 
     @Override
-    default List<CartItemEntity> getCartItemsByCartIt(String cartId) {
-        return this.findByCartId(new ObjectId(cartId));
+    default List<CartItemEntity> getCartItemsByCartId(String cartId) {
+        return this.findById_CartId(new ObjectId(cartId));
+    }
+
+    @Override
+    default void saveCartItem(CartItemEntity cartItemEntity) {
+        this.save(cartItemEntity);
     }
 }
