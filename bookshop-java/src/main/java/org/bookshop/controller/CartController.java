@@ -40,13 +40,23 @@ public class CartController {
         return ResponseEntity.ok(cart);
     }
 
-    @PutMapping("")
+    @PostMapping("")
     @ApiOperation(value = "Add CartItem to Cart")
     public ResponseEntity<?> addItemToCart(@RequestBody CartItemWriteModel cartItemWM){
-        logger.info("Sent request to add cartItem to cart with User Id: {}", cartItemWM.getCartId());
+        logger.info("Sent request to add cartItem to cart with cart Id: {}", cartItemWM.getCartId());
         Product product = productService.getProductById(cartItemWM.getProductId());
         CartItem cartItem = CartItemMapper.cartItemWriteModelToDomain(cartItemWM, product);
         cartItemService.addItemToCart(cartItem);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("")
+    @ApiOperation(value = "Edit CartItem")
+    public ResponseEntity<?> editCartItem(@RequestBody CartItemWriteModel cartItemWM){
+        logger.info("Sent request to edit cartItem with cart Id: {}", cartItemWM.getCartId());
+        Product product = productService.getProductById(cartItemWM.getProductId());
+        CartItem cartItem = CartItemMapper.cartItemWriteModelToDomain(cartItemWM, product);
+        cartItemService.editCartItem(cartItem);
         return ResponseEntity.noContent().build();
     }
 }
