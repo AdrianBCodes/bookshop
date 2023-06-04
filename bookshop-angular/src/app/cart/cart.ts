@@ -1,18 +1,23 @@
-import { CartItem } from "./cartItem";
+import Big from "big.js";
+import { CartItem } from "./cartItem/cartItem";
 
 export class Cart {
-    id: string;
     userId: string;
     items: CartItem[];
+    totalPrice: number;
 
     constructor(fields: {
-        id: string,
         userId: string,
-        items: CartItem[]
+        items: CartItem[],
+        totalPrice: number
     }) {
-        this.id = fields.id;
         this.userId = fields.userId;
         this.items = fields.items;
+        this.totalPrice = fields.totalPrice
+    }
+
+    updateTotalPrice(): void {
+        this.totalPrice = this.items.reduce((total, item) => total + item.totalPrice, 0);
     }
     
 }

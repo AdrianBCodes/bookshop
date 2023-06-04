@@ -3,7 +3,7 @@
     <table class="table">
         <thead>
             <tr>
-              <th>Name</th>
+              <th>Product</th>
               <th>Quantity</th>
               <th>Price</th>
             </tr>
@@ -16,8 +16,12 @@
                     {{ item.quantity}}
                     <button class="button" (click)="plusQuantity(item)">+</button>
                 </td>
-                <!-- Replace with totalPrice from Cartitem -->
-                <td>{{ item.product.price }}</td>
+                <td>{{ item.totalPrice }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>{{ cart.totalPrice }}</td>
             </tr>
         </tbody>
     </table>
