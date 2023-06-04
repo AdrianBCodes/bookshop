@@ -5,6 +5,7 @@ import org.bookshop.product.Product;
 import org.bookshop.product.ProductService;
 
 import java.util.List;
+import java.util.Map;
 
 public class CartItemProvider {
 
@@ -18,11 +19,14 @@ public class CartItemProvider {
     }
 
     List<CartItem> getCartItemsByCartId(String id){
-        return cartItemRepository.getCartItemsByCartId(id)
-                .stream().map(cartItemEntity -> {
-                    Product product = productService.getProductById(cartItemEntity.getId().getProductId());
-                    return CartItemMapper.cartItemEntityToDomain(cartItemEntity, product);
-                }).toList();
+        List<CartItemEntity> items = cartItemRepository.getCartItemsByCartId(id);
+        List<String> productsIds = items
+                .stream()
+                .map(item ->
+                        item.getId().getProductId())
+                .toList();
+        Map<String, Product> productsFromItems = productService.getProductsByIds(productsIds);
+        return CartItemMapper.cartItemEntitiesToDomains(items, productsFromItems);
     }
 
     public void addItemToCart(CartItem cartItem) {

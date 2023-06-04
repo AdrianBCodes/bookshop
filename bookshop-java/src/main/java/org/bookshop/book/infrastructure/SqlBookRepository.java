@@ -8,16 +8,30 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public interface SqlBookRepository extends BookRepository, MongoRepository<Book, String> {
     @NonNull
     Page<Book> findAll(@NonNull Pageable pageable);
 
+    Set<Book> findBooksByIdIn(List<String> ids);
+
     @Override
     default Optional<Book> findBookById(String id){
         return this.findById(id);
+    }
+
+    @Override
+    default Map<String, Book> findBooksByIds(List<String> ids) {
+        return this.findBooksByIdIn(ids).stream()
+                .collect(Collectors.toMap(
+                        Book::getId,
+                        book -> book
+        ));
     }
 
     @Override

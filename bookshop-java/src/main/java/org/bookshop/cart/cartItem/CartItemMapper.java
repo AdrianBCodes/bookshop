@@ -6,6 +6,9 @@ import org.bookshop.cart.cartItem.infrastructure.CartItemWriteModel;
 import org.bookshop.product.Product;
 import org.bson.types.ObjectId;
 
+import java.util.List;
+import java.util.Map;
+
 public class CartItemMapper {
     public static CartItem cartItemEntityToDomain(CartItemEntity cartItemEntity, Product product){
         return CartItem.createCartItem(
@@ -26,5 +29,14 @@ public class CartItemMapper {
                 cartItemWriteModel.getCartId(),
                 product,
                 cartItemWriteModel.getQuantity());
+    }
+
+    public static List<CartItem> cartItemEntitiesToDomains(List<CartItemEntity> cartItemEntityList, Map<String, Product> productMap){
+        return cartItemEntityList.stream()
+                .map(cartItemEntity ->
+                cartItemEntityToDomain(
+                        cartItemEntity,
+                        productMap.get(cartItemEntity.getId().getProductId()))
+                ).toList();
     }
 }

@@ -3,25 +3,33 @@ package org.bookshop.cart.cartItem.dto;
 import org.bookshop.cart.cartItem.CartItem;
 import org.bookshop.product.Product;
 
+import java.math.BigDecimal;
+
 public class CartItemDTO {
     private String cartId;
     private Product product;
     private int quantity;
+    private BigDecimal totalPrice;
 
     public CartItemDTO() {
     }
 
-    public CartItemDTO(String cartId, Product product, int quantity) {
+    private CartItemDTO(String cartId, Product product, int quantity, BigDecimal totalPrice) {
         this.cartId = cartId;
         this.product = product;
         this.quantity = quantity;
+        this.totalPrice = totalPrice;
     }
 
     public static CartItemDTO createCartItemDTO(CartItem cartItem){
         return new CartItemDTO(
                 cartItem.getCartId(),
                 cartItem.getProduct(),
-                cartItem.getQuantity());
+                cartItem.getQuantity(),
+                cartItem.getProduct()
+                        .getPrice()
+                        .multiply(BigDecimal.valueOf(cartItem.getQuantity()))
+        );
     }
 
     public String getCartId() {
@@ -46,5 +54,13 @@ public class CartItemDTO {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

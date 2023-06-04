@@ -1,25 +1,36 @@
 package org.bookshop.cart.dto;
 
 import org.bookshop.cart.Cart;
+import org.bookshop.cart.cartItem.CartItem;
 import org.bookshop.cart.cartItem.dto.CartItemDTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CartDTO {
     private String userId;
     private final List<CartItemDTO> items;
+    private BigDecimal totalPrice;
 
-    public CartDTO(String userId, List<CartItemDTO> items) {
+    public CartDTO(String userId, List<CartItemDTO> items, BigDecimal totalPrice) {
         this.userId = userId;
         this.items = items;
+        this.totalPrice = totalPrice;
     }
 
     public static CartDTO createCartDTO(Cart cart){
         return new CartDTO(
                 cart.getUser().getId().toString(),
-                cart.getItems().stream().map(CartItemDTO::createCartItemDTO).collect(Collectors.toList())
-        );
+                cart.getItems()
+                        .stream()
+                        .map(CartItemDTO::createCartItemDTO)
+                        .collect(Collectors.toList()),
+                cart.getItems()
+                        .stream()
+                        .map(CartItem::getTotalPrice)
+                        .reduce(BigDecimal::add)
+                        .orElse(BigDecimal.ZERO));
     }
 
     public String getUserId() {
@@ -32,5 +43,13 @@ public class CartDTO {
 
     public List<CartItemDTO> getItems() {
         return items;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
