@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class BookService {
     private final BookRepository bookRepository;
-    private final Logger logger = LoggerFactory.getLogger(BookService.class);
+    private static final Logger logger = LoggerFactory.getLogger(BookService.class);
 
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;

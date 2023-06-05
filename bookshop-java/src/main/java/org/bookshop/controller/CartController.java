@@ -23,7 +23,7 @@ public class CartController {
     private final CartService cartService;
     private final CartItemService cartItemService;
     private final ProductService productService;
-    private final Logger logger = LoggerFactory.getLogger(CartController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 
     public CartController(CartService cartService, CartItemService cartItemService, ProductService productService) {
         this.cartService = cartService;
