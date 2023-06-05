@@ -63,4 +63,13 @@ public class CartItemDTO {
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return String.format("CartItemDTO{cartId='%s', productId=%s, quantity=%d, totalPrice=%f}",
+                cartId,
+                product.getId(),
+                quantity,
+                totalPrice);
+    }
 }

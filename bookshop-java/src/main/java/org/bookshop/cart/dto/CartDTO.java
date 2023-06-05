@@ -1,7 +1,6 @@
 package org.bookshop.cart.dto;
 
 import org.bookshop.cart.Cart;
-import org.bookshop.cart.cartItem.CartItem;
 import org.bookshop.cart.cartItem.dto.CartItemDTO;
 
 import java.math.BigDecimal;
@@ -26,11 +25,7 @@ public class CartDTO {
                         .stream()
                         .map(CartItemDTO::createCartItemDTO)
                         .collect(Collectors.toList()),
-                cart.getItems()
-                        .stream()
-                        .map(CartItem::getTotalPrice)
-                        .reduce(BigDecimal::add)
-                        .orElse(BigDecimal.ZERO));
+                cart.getTotalPrice());
     }
 
     public String getUserId() {
@@ -51,5 +46,13 @@ public class CartDTO {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("CartDTO{userId='%s', items=%s, totalPrice=%s}",
+                userId,
+                items,
+                totalPrice);
     }
 }

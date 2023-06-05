@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
 
@@ -76,5 +77,24 @@ public class Book implements Product {
                 description,
                 category.toString(),
                 price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, category, price);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Book other = (Book) obj;
+        return Objects.equals(id, other.id) &&
+                Objects.equals(name, other.name) &&
+                Objects.equals(description, other.description) &&
+                category == other.category &&
+                Objects.equals(price, other.price);
     }
 }
