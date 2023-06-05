@@ -1,11 +1,9 @@
 package org.bookshop.book;
 
-import org.bson.types.ObjectId;
-
 import java.math.BigDecimal;
 
 public class BookBuilder {
-    private ObjectId id;
+    private String id;
     private String name;
     private String description;
     private BookCategory category;
@@ -15,7 +13,7 @@ public class BookBuilder {
         return new BookBuilder();
     }
 
-    public BookBuilder withId(ObjectId id){
+    public BookBuilder withId(String id){
         this.id = id;
         return this;
     }
