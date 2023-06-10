@@ -13,8 +13,8 @@ public class CartBuilder {
     public static CartBuilder builder(){
         return new CartBuilder();
     }
-    public CartBuilder withUser(User userId){
-        this.user = userId;
+    public CartBuilder withUser(User user){
+        this.user = user;
         return this;
     }
 

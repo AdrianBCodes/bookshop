@@ -2,6 +2,7 @@ package org.bookshop.cart;
 
 import org.bookshop.cart.cartItem.CartItem;
 import org.bookshop.cart.cartItem.CartItemService;
+import org.bookshop.cart.infrastructure.CartEntity;
 import org.bookshop.exceptions.NotFoundException;
 import org.bookshop.user.User;
 import org.bookshop.user.UserRepository;
@@ -25,12 +26,17 @@ public class CartProvider {
     }
 
     public Cart getCartByUserId(ObjectId userId){
-        User user = userRepository.getUserById(userId)
+        CartEntity cartEntity = cartRepository.getCartByUserId(userId)
+                .orElseThrow(() -> {
+                    logger.error(String.format("Cart for User with id: %s not found", userId.toString()));
+                    return new NotFoundException(String.format("Cart for User with id: %s not found", userId));
+                });
+        User user = userRepository.getUserById(cartEntity.getUserId())
                 .orElseThrow(() -> {
                     logger.error(String.format("User with id: %s not found", userId.toString()));
                     return new NotFoundException(String.format("User with id: %s not found", userId));
                 });
-        List<CartItem> cartItemList = cartItemService.getCartItemsByCartId(userId.toString());
+        List<CartItem> cartItemList = cartItemService.getCartItemsByCartId(cartEntity.getUserId().toString());
         return CartMapper.cartEntityToDomain(user, cartItemList);
     }
 }
