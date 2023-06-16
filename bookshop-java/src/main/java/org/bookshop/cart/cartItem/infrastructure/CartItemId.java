@@ -20,6 +20,12 @@ public class CartItemId {
     public String getProductId() {
         return productId;
     }
+
+    @Override
+    public String toString() {
+        return String.format("CartItemId{cartId=%s, productId=%s}", cartId, productId);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
