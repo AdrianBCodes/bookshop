@@ -1,0 +1,18 @@
+<div class="container" *ngIf="book">
+    <div class="content">
+        <div class="image">
+            <img src="../../../assets/images/default_book_avatar.png" 
+            alt="Avatar" style="width:100%; max-width: 240px;">
+        </div>
+        <div class="details">
+            <h1>{{book.name}}</h1>
+            <p>{{book.category}}</p>
+            <p>{{book.description}}</p>
+        </div>
+        <div class="right-side-bar">
+            <h4>Price:</h4>
+            <p>{{book.price}}</p>
+            <app-button-custom (click)="addToCart(book.id)" text="Add to Cart"></app-button-custom>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+.button {
+    background-color: grey;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.button:disabled{
+    background-color: #d1d0d0;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.button:hover{
+    background-color: #3f3535dc;
+    cursor: pointer;
+}

@@ -1,28 +1,40 @@
 <div class="container">
-    <h1>Shopping Cart</h1>
-    <table class="table">
+    <div class="header">
+        <h1>Shopping Cart</h1>
+    </div>
+    <div class="emptyMessage" *ngIf="cart.items.length == 0">
+        Empty
+    </div>
+    <table class="table" *ngIf="cart.items.length > 0">
         <thead>
             <tr>
               <th>Product</th>
               <th>Quantity</th>
               <th>Price</th>
+              <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of cart.items">
-                <td>{{ item.product.name }}</td>
-                <td>
-                    <button class="button" (click)="minusQuantity(item)">-</button>
-                    {{ item.quantity}}
-                    <button class="button" (click)="plusQuantity(item)">+</button>
-                </td>
-                <td>{{ item.totalPrice }}</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>{{ cart.totalPrice }}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>
+                        <div class="quantityOptions">
+                            <app-button-custom (click)="minusQuantity(item)" text="-" padding="2% 6%"></app-button-custom>
+                            <input type="text" [(ngModel)]="item.quantity">
+                            <app-button-custom (click)="plusQuantity(item)" text="+" padding="2% 6%"></app-button-custom>
+                        </div>
+                    </td>
+                    <td>{{ item.totalPrice.toFixed(2) }}</td>
+                    <td>
+                        <app-button-custom text="Remove" padding="3% 6%"></app-button-custom>
+                    </td>
             </tr>
         </tbody>
     </table>
+    <div class="summary">
+        <p>Total Price: <b>{{cart.totalPrice.toFixed(2)}}</b></p>
+        <div>
+            <app-button-custom text="Checkout"></app-button-custom>
+        </div>
+    </div>
 </div>

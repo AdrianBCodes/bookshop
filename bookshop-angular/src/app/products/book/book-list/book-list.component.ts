@@ -23,7 +23,7 @@ export class BookListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getBooks({ page: "0", size: "5" });
+    this.getBooks({ page: "1", size: "5" });
   }
 
   private getBooks(request){
@@ -43,7 +43,7 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['books', id]);
   }
 
-  async addToCart(id: string) {
+  addToCart(id: string) {
     this.cartService.addToCart(id).subscribe();
   }
 }

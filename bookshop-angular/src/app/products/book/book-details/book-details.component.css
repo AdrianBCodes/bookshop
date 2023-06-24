@@ -1,0 +1,19 @@
+.containter {
+    width: 100%;
+}
+
+.content{
+    display: flex;
+}
+
+.details{
+    flex-grow: 1;
+    padding: 1%;
+
+}
+.right-side-bar{
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    text-align: center;
+}

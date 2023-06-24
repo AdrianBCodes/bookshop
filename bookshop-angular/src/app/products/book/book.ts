@@ -1,5 +1,5 @@
 import Big from 'big.js';
-import { Product } from '../interfaces/product';
+import { Product } from '../product';
 
 export enum BookCategory {
     ACTION = "Action",
