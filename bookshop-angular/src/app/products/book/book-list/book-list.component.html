@@ -1,19 +1,9 @@
 
-<div class="container">
-    <div class="header">
-        <h2>Books</h2>
-    </div>
-    <div class="content">
-        <div *ngFor="let book of books; let last = last" [ngClass]="{'card': true, 'last-card': last}">
-            <a [routerLink]="['/books', book.id]">
-            <img src="../../../assets/images/default_book_avatar.png" 
-            alt="Avatar" style="width:100%; max-width: 80px;">
-            </a>
-            <h4><p><a [routerLink]="['/books', book.id]">{{book.name}}</a></p></h4>
-            <p>{{book.description}}</p>
-            <p>{{book.category}}</p>
-            <p class="price">{{book.price.toFixed(2)}}</p>
-            <app-button-custom (click)="addToCart(book.id)" text="Add to Cart"></app-button-custom>
-        </div>
-    </div>
-</div>
+<app-product-list 
+headerTitle="Books"
+ [products]="books" 
+ [isShowMoreActive]="true"
+ [showMoreLink]="'books'"
+ [isPageNavActive]="true"
+ (nextPage)="nextPage()"
+ (previousPage)="previousPage()" />

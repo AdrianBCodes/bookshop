@@ -25,16 +25,17 @@ td {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: rgb(245, 238, 225);
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: rgb(245, 238, 225);
 }
 
 .summary{
-  background-color: #f2f2f2;
+  background-color: rgb(245, 238, 225);
   padding: 10%;
+  margin: 5%;
   grid-row: 4;
   grid-column: 3;
 }
@@ -53,4 +54,17 @@ input{
 
 .quantityOptions{
   display: inline-block;
+}
+
+
+/* removes arrows for input field of number type */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox specific case */
+input[type=number] {
+  -moz-appearance: textfield;
 }

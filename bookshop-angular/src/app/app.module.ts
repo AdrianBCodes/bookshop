@@ -10,6 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { CartComponent } from './cart/cart.component';
 import { ButtonCustomComponent } from './shared/components/button-custom/button-custom.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { BookListingPageComponent } from './pages/book-listing-page/book-listing-page.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { ButtonCustomComponent } from './shared/components/button-custom/button-
     BookDetailsComponent,
     CartComponent,
     ButtonCustomComponent,
+    HomePageComponent,
+    ProductListComponent,
+    BookListingPageComponent,
   ],
   imports: [
     BrowserModule,

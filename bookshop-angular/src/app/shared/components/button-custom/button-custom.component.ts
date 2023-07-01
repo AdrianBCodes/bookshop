@@ -12,6 +12,7 @@ export class ButtonCustomComponent {
   @Output() click: EventEmitter<void> = new EventEmitter<void>();
 
   onClick(): void {
-    this.click.emit;
+    if(!this.disabled)
+      this.click.emit;
   }
 }

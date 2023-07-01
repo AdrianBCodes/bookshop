@@ -1,20 +1,18 @@
-import { Component, OnInit} from '@angular/core';
-import { Book } from '../book';
-import { BookService } from '../book.service';
-import { PageParams} from 'src/app/shared/interfaces/PageParams';
-
+import { Component } from '@angular/core';
+import { Book } from 'src/app/products/book/book';
+import { BookService } from 'src/app/products/book/book.service';
+import { PageParams } from 'src/app/shared/interfaces/PageParams';
 
 @Component({
-  selector: 'app-book-list',
-  templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css']
+  selector: 'app-book-listing-page',
+  templateUrl: './book-listing-page.component.html',
+  styleUrls: ['./book-listing-page.component.css']
 })
-export class BookListComponent implements OnInit {
-
+export class BookListingPageComponent {
   books: Book[] = [];
   totalElements: number = 0;
   totalPages: number = 0;
-  params: PageParams = { page: 0, size: 5 };
+  params: PageParams = { page: 0, size: 20 };
 
   constructor(private bookService: BookService) { }
 

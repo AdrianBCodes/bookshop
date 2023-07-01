@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Cart } from './cart';
 import { CartItem } from './cartItem/cartItem';
 import { CartService } from './cart.service';
-import Big from 'big.js';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +10,7 @@ import Big from 'big.js';
 })
 export class CartComponent implements OnInit {
   
-  cart: Cart = new Cart({ userId: '', items: [], totalPrice: 0 });
+  cart: Cart = new Cart();
 
   constructor(private cartService: CartService) {
   }
@@ -27,16 +26,18 @@ export class CartComponent implements OnInit {
   }
 
   minusQuantity(item: CartItem){
-    if(item.quantity > 1){
-      item.quantity-= 1;
-      item.totalPrice = this.calculateCartItemTotalPrice(item.quantity, Number(item.product.price));
-      this.cart.updateTotalPrice()
-      this.cartService.editCartItem(item).subscribe();
-    }
+    if(item.quantity <= 1)
+      return;
+    item.quantity-= 1;
+    item.totalPrice = this.calculateCartItemTotalPrice(item.quantity, Number(item.product.price));
+    this.cart.updateTotalPrice()
+    this.cartService.editCartItem(item).subscribe();
 
   }
 
   plusQuantity(item: CartItem){
+    if(item.quantity < 1)
+      return
     item.quantity+= 1;
     item.totalPrice = this.calculateCartItemTotalPrice(item.quantity, Number(item.product.price));
     this.cart.updateTotalPrice()
@@ -45,5 +46,41 @@ export class CartComponent implements OnInit {
 
   calculateCartItemTotalPrice(quantity: number, price: number): number {
     return price * quantity;
+  }
+
+  isQuantityButtonDisabled(quantity: number): boolean{
+    if(quantity <= 1)
+      return true;
+    return false;
+  }
+
+  verifyQuantity(item: CartItem): void {
+    if(item.quantity < 1)
+      item.quantity = 1;
+  }
+
+  onInputQuantityChange(event: Event, item: CartItem): void{
+    const inputElement = event.target as HTMLInputElement;
+    const inputValue = parseInt(inputElement.value, 10);
+    
+    console.log(inputElement);
+    console.log(inputValue);
+
+    if(inputElement.value=='')
+      return;
+
+
+    if(isNaN(inputValue) || inputValue < 1) {
+      item.quantity = 1;
+      inputElement.value = '1';
+    }
+    if(inputValue > 99){
+      item.quantity = 99;
+      inputElement.value = '99';
+    }
+
+    item.totalPrice = this.calculateCartItemTotalPrice(item.quantity, Number(item.product.price));
+    this.cart.updateTotalPrice()
+    this.cartService.editCartItem(item).subscribe();
   }
 }

@@ -19,8 +19,8 @@
                     <td>{{ item.product.name }}</td>
                     <td>
                         <div class="quantityOptions">
-                            <app-button-custom (click)="minusQuantity(item)" text="-" padding="2% 6%"></app-button-custom>
-                            <input type="text" [(ngModel)]="item.quantity">
+                            <app-button-custom (click)="minusQuantity(item)" text="-" padding="2% 6%" [disabled]="isQuantityButtonDisabled(item.quantity)"></app-button-custom>
+                            <input type="number" [(ngModel)]="item.quantity" [min]="1" (input)="onInputQuantityChange($event, item)">
                             <app-button-custom (click)="plusQuantity(item)" text="+" padding="2% 6%"></app-button-custom>
                         </div>
                     </td>

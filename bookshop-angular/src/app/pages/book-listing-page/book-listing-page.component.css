@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+}
+
+.content{
+    flex:1;
+    margin-bottom: 2%;
+}
+
+.sidebar{
+    width: 20%;
+    padding-top: 6%;
+    padding-bottom: 6%;
+}

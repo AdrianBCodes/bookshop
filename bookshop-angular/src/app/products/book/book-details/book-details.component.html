@@ -11,7 +11,7 @@
         </div>
         <div class="right-side-bar">
             <h4>Price:</h4>
-            <p>{{book.price}}</p>
+            <p>{{book.price.toFixed(2)}}</p>
             <app-button-custom (click)="addToCart(book.id)" text="Add to Cart"></app-button-custom>
         </div>
     </div>

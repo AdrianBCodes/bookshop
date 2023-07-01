@@ -1,6 +1,6 @@
 .card {
     padding: 2% 0%;
-    border-right: 1px solid #eee;
+    border: 1px solid #eee;
     margin: auto;
     text-align: center;
     font-family: arial;
@@ -8,9 +8,6 @@
     width: 19.5%;
 }
 
-.last-card {
-    border-right: none;
-}
 .price {
     color: grey;
 }
@@ -29,9 +26,11 @@ p a {
 }
 .header {
     font-size: larger;
-    border-bottom: 1px solid #eee;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 2%;
     padding: 1% 1%;
     min-height: 50px;
+    margin-right: 1.5%;
 }
 .header-left{
     float: left;
