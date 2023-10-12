@@ -27,12 +27,17 @@ public class CartProvider {
 
     public Cart getCartByUserId(ObjectId userId){
         logger.info("Getting cart with userId: {}", userId.toString());
+        CartEntity cartEntity = cartRepository.getCartByUserId(userId)
+                .orElseThrow(() -> {
+                    logger.error(String.format("Cart for User with id: %s not found", userId));
+                    return new NotFoundException(String.format("Cart for User with id: %s not found", userId));
+                });
         User user = userRepository.getUserById(userId)
                 .orElseThrow(() -> {
                     logger.error("User with id: {} not found", userId);
                     return new NotFoundException(String.format("User with id: %s not found", userId));
                 });
-        List<CartItem> cartItemList = cartItemService.getCartItemsByCartId(userId.toString());
+        List<CartItem> cartItemList = cartItemService.getCartItemsByCartId(cartEntity.getUserId().toString());
         return CartMapper.cartEntityToDomain(user, cartItemList);
     }
 }
