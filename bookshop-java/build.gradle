@@ -11,9 +11,14 @@ plugins {
 group = 'org.bookshop'
 version = 'v1'
 
+bootJar {
+    archivesBaseName = 'bookshop-java'
+    archiveFileName = "${archivesBaseName}.jar"
+}
+
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(18)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
