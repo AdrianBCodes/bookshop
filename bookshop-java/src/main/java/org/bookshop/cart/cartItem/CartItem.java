@@ -55,4 +55,17 @@ public class CartItem {
     public BigDecimal getTotalPrice(){
         return product.getPrice().multiply(BigDecimal.valueOf(quantity));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartItem cartItem = (CartItem) o;
+        return quantity == cartItem.quantity && cartId.equals(cartItem.cartId) && product.getId().equals(cartItem.product.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cartId, product.getId(), quantity);
+    }
 }

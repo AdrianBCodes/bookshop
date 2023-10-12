@@ -5,6 +5,7 @@ import org.bookshop.user.User;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 
 public class Cart {
@@ -43,5 +44,18 @@ public class Cart {
                 .map(CartItem::getTotalPrice)
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return user.getId().equals(cart.user.getId()) && Objects.equals(items, cart.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user.getId(), items);
     }
 }
