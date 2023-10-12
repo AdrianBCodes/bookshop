@@ -17,7 +17,7 @@ public class CartProvider {
     private final UserRepository userRepository;
 
     private final CartItemService cartItemService;
-    private final Logger logger = LoggerFactory.getLogger(CartProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(CartProvider.class);
 
     public CartProvider(CartRepository cartRepository, UserRepository userRepository, CartItemService cartItemService) {
         this.cartRepository = cartRepository;
@@ -26,17 +26,13 @@ public class CartProvider {
     }
 
     public Cart getCartByUserId(ObjectId userId){
-        CartEntity cartEntity = cartRepository.getCartByUserId(userId)
+        logger.info("Getting cart with userId: {}", userId.toString());
+        User user = userRepository.getUserById(userId)
                 .orElseThrow(() -> {
-                    logger.error(String.format("Cart for User with id: %s not found", userId.toString()));
-                    return new NotFoundException(String.format("Cart for User with id: %s not found", userId));
-                });
-        User user = userRepository.getUserById(cartEntity.getUserId())
-                .orElseThrow(() -> {
-                    logger.error(String.format("User with id: %s not found", userId.toString()));
+                    logger.error("User with id: {} not found", userId);
                     return new NotFoundException(String.format("User with id: %s not found", userId));
                 });
-        List<CartItem> cartItemList = cartItemService.getCartItemsByCartId(cartEntity.getUserId().toString());
+        List<CartItem> cartItemList = cartItemService.getCartItemsByCartId(userId.toString());
         return CartMapper.cartEntityToDomain(user, cartItemList);
     }
 }

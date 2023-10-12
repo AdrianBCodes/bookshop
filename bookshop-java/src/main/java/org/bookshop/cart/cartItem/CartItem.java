@@ -57,15 +57,28 @@ public class CartItem {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CartItem cartItem = (CartItem) o;
-        return quantity == cartItem.quantity && cartId.equals(cartItem.cartId) && product.getId().equals(cartItem.product.getId());
-    }
-
-    @Override
     public int hashCode() {
         return Objects.hash(cartId, product.getId(), quantity);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        CartItem other = (CartItem) obj;
+        return Objects.equals(cartId, other.cartId) &&
+                Objects.equals(product.getId(), other.product.getId()) &&
+                quantity == other.quantity;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("CartItem{cartId='%s', productId=%s, quantity=%d}",
+                cartId,
+                product.getId(),
+                quantity);
+    }
+  
 }

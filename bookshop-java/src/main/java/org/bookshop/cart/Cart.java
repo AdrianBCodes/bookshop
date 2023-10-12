@@ -58,4 +58,10 @@ public class Cart {
     public int hashCode() {
         return Objects.hash(user.getId(), items);
     }
+    
+    @Override
+    public String toString() {
+        return String.format("Cart{userId=%s, items=%s}",
+                user.getId(),
+                items);
 }
