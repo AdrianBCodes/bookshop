@@ -64,4 +64,5 @@ public class Cart {
         return String.format("Cart{userId=%s, items=%s}",
                 user.getId(),
                 items);
+    }
 }
