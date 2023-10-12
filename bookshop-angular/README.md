@@ -1,27 +1,71 @@
-# BookshopAngular
+# Bookshop-angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+-------------
 
-## Development server
+[Angular](https://angular.io) frontend application for [Bookshop](https://github.com/AdrianBCodes/bookshop) project.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- Displaying data: Displaying user-friendly interface. Making requests to the API to read and change data.
+- Create and update data: Using interface to collect user input and making requests to the API to create and update data.
+- Error handling: Handling errors that may occur when making requests to the API, such as network errors, server errors, or validation errors.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Built with
 
-## Build
+- [Angular](https://angular.io)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Project setup
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Using Docker
 
-## Running end-to-end tests
+#### Clone the repository
+```console
+git clone https://github.com/AdrianBCodes/bookshop.git
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### Build Docker Image
+```console
+cd bookshop-angular
+docker build -t bookshop-angular:1.0
+```
 
-## Further help
+#### Start Docker Container
+```console
+docker run -p 4200:4200 bookshop-angular:1.0
+```
+This command will start the Docker container and expose port 4200 to the host system. You can change port number, if you want to expose it on a different one.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### Access the application
+```console
+http://localhost:4200
+```
+
+Make sure you have Docker installed on your system before running the above commands.
+
+### Without Docker
+
+For building and running the application you need:
+- [Angular CLI](https://github.com/angular/angular-cli)
+- [Nodejs](https://nodejs.org/en)
+
+#### Clone the repository
+```console
+git clone https://github.com/AdrianBCodes/bookshop.git
+```
+
+#### Build project
+```console
+cd bookshop-angular
+ng build
+```
+
+#### Run project locally
+```console
+ng serve
+```
+
+#### Access the application
+```console
+http://localhost:4200
+```
