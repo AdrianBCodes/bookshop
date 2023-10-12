@@ -1,6 +1,6 @@
 package org.bookshop.cart.cartItem;
 
-import org.bookshop.book.BookExample;
+import book.BookExample;
 
 import java.util.List;
 

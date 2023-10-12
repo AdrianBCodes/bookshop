@@ -51,12 +51,12 @@ public class Cart {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cart cart = (Cart) o;
-        return user.getId().equals(cart.user.getId()) && Objects.equals(items, cart.items);
+        return user.equals(cart.user) && Objects.equals(items, cart.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user.getId(), items);
+        return Objects.hash(user, items);
     }
     
     @Override
