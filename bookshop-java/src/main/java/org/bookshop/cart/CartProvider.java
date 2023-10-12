@@ -2,6 +2,7 @@ package org.bookshop.cart;
 
 import org.bookshop.cart.cartItem.CartItem;
 import org.bookshop.cart.cartItem.CartItemService;
+import org.bookshop.cart.infrastructure.CartEntity;
 import org.bookshop.exceptions.NotFoundException;
 import org.bookshop.user.User;
 import org.bookshop.user.UserRepository;

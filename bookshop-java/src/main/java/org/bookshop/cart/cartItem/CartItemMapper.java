@@ -39,4 +39,10 @@ public class CartItemMapper {
                         productMap.get(cartItemEntity.getId().getProductId()))
                 ).toList();
     }
+
+    public static List<CartItemEntity> cartItemDomainsToEntities(List<CartItem> cartItemList){
+        return cartItemList.stream()
+                .map(CartItemMapper::cartItemDomainToEntity)
+                .toList();
+    }
 }

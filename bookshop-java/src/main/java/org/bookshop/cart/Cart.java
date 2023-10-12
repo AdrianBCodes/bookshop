@@ -47,25 +47,21 @@ public class Cart {
     }
 
     @Override
-    public String toString() {
-        return String.format("Cart{userId=%s, items=%s}",
-                user.getId(),
-                items);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return user.getId().equals(cart.user.getId()) && Objects.equals(items, cart.items);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(user.getId(), items);
     }
-
+    
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
-        Cart other = (Cart) obj;
-        return Objects.equals(user.getId(), other.user.getId()) &&
-                Objects.equals(items, other.items);
-    }
+    public String toString() {
+        return String.format("Cart{userId=%s, items=%s}",
+                user.getId(),
+                items);
 }

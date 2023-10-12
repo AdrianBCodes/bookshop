@@ -57,14 +57,6 @@ public class CartItem {
     }
 
     @Override
-    public String toString() {
-        return String.format("CartItem{cartId='%s', productId=%s, quantity=%d}",
-                cartId,
-                product.getId(),
-                quantity);
-    }
-
-    @Override
     public int hashCode() {
         return Objects.hash(cartId, product.getId(), quantity);
     }
@@ -80,4 +72,13 @@ public class CartItem {
                 Objects.equals(product.getId(), other.product.getId()) &&
                 quantity == other.quantity;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("CartItem{cartId='%s', productId=%s, quantity=%d}",
+                cartId,
+                product.getId(),
+                quantity);
+    }
+  
 }
