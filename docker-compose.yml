@@ -1,0 +1,49 @@
+version: '3.6'
+services:
+  bookshop-mongodb:
+    container_name: bookshop-mongodb
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - db-data:/var/lib/mongodb/data
+    networks:
+      - spring-angular-mongodb-network
+
+  bookshop-java:
+    depends_on:
+      - bookshop-mongodb
+    container_name: bookshop-java
+    build:
+      context: ./bookshop-java
+      dockerfile: Dockerfile
+    image: bookshop/bookshop-java
+    environment:
+    - SPRING.DATA.MONGODB.URI=mongodb://bookshop-mongodb:27017/bookshop
+    - SPRING.DATA.MONGODB.DATABASE=bookshop
+    - MONGOCK.CHANGE-LOGS-SCAN-PACKAGE=org.bookshop.configuration.mongo.changelogs
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-angular-mongodb-network
+
+  bookshop-angular:
+    container_name: bookshop-angular
+    build:
+      context: ./bookshop-angular
+      dockerfile: Dockerfile
+    image: bookshop/bookshop-angular
+    ports:
+      - "4200:4200"
+    depends_on:
+      - bookshop-java
+    networks:
+      - spring-angular-mongodb-network
+
+networks:
+  spring-angular-mongodb-network:
+    driver: bridge
+
+volumes:
+  db-data:
