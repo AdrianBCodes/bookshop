@@ -1,28 +1,70 @@
 .container {
-    padding: 0 2% 0 2%
+  padding: 0 2% 0 2%;
+  display: grid;
+  grid-template-rows: 0.5fr 2fr 0.5fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {background-color: #f2f2f2;}
+.header{
+  align-self: center;
+}
 
-  .button {
-    background-color: grey;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 1%;
-  }
+table, .emptyMessage {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: rgb(245, 238, 225);
+}
+
+tr:nth-child(even) {
+  background-color: rgb(245, 238, 225);
+}
+
+.summary{
+  background-color: rgb(245, 238, 225);
+  padding: 10%;
+  margin: 5%;
+  grid-row: 4;
+  grid-column: 3;
+}
+
+input{
+  text-align: center;
+  box-shadow: inset 2px 2px 1px #efefef;
+  border: none;
+  width: 8%;
+  padding: 3% 4%;
+  min-width: 15px;
+  margin: 0 1px;
+  border-radius: 3px;
+  vertical-align: top;
+}
+
+.quantityOptions{
+  display: inline-block;
+}
+
+
+/* removes arrows for input field of number type */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox specific case */
+input[type=number] {
+  -moz-appearance: textfield;
+}

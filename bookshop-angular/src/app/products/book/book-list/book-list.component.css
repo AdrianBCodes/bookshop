@@ -1,0 +1,56 @@
+.card {
+    padding: 2% 0%;
+    border-right: 1px solid #eee;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    float: left;
+    width: 19.5%;
+}
+
+.last-card {
+    border-right: none;
+}
+.price {
+    color: grey;
+}
+
+.containter {
+    width: 100%;
+}
+
+a{
+    cursor: pointer;
+}
+
+p a {
+    text-decoration: none; 
+    color: black;
+}
+.header {
+    font-size: larger;
+    border-bottom: 1px solid #eee;
+    padding: 1% 1%;
+    min-height: 50px;
+}
+.header-left{
+    float: left;
+    width: 50%;
+}
+
+.header-left span{
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: arial;
+    margin-right: 2%;
+}
+
+.header-right{
+    float: right;
+    width: 50%;
+}
+
+.header-right app-button-custom{
+    float: right;
+    margin-left: 1%;
+}

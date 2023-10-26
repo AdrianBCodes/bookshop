@@ -1,0 +1,19 @@
+.button {
+    background-color: rgb(240, 156, 2);
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 6px;
+}
+.button:disabled{
+    background-color: rgb(255, 196, 86);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.button:hover{
+    background-color: rgb(199, 130, 1);
+    cursor: pointer;
+}

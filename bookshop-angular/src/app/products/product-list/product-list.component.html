@@ -1,0 +1,24 @@
+
+<div class="container">
+    <div class="header">
+        <div class="header-left">
+            <span>{{headerTitle}}</span>
+            <a *ngIf="isShowMoreActive" (click)="showMoreNavigation()" class="nav-link" required>Show more</a>
+        </div>
+        <div class="header-right">
+            <app-button-custom *ngIf="isPageNavActive" text=">" (click)="nextPage.emit()" required />
+            <app-button-custom *ngIf="isPageNavActive" text="<" (click)="previousPage.emit()" required  />
+        </div>
+    </div>
+    <div class="content">
+        <div *ngFor="let product of products; let last = last" [ngClass]="{'card': true, 'last-card': last}" #card>
+            <a (click)="navigateToProductDetails(product.id)">
+            <img src="../../../assets/images/default_book_avatar.png" 
+            alt="Avatar" style="width:100%; max-width: 80px;">
+            </a>
+            <h4 style="min-height: 6em"><p><a (click)="navigateToProductDetails(product.id)">{{product.name}}</a></p></h4>
+            <p class="price">{{product.price.toFixed(2)}}</p>
+            <app-button-custom (click)="addToCart(product.id)" text="Add to Cart"></app-button-custom>
+        </div>
+    </div>
+</div>

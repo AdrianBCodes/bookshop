@@ -1,4 +1,3 @@
-import Big from "big.js";
 import { CartItem } from "./cartItem/cartItem";
 
 export class Cart {
@@ -6,14 +5,14 @@ export class Cart {
     items: CartItem[];
     totalPrice: number;
 
-    constructor(fields: {
+    constructor(fields?: {
         userId: string,
         items: CartItem[],
         totalPrice: number
     }) {
-        this.userId = fields.userId;
-        this.items = fields.items;
-        this.totalPrice = fields.totalPrice
+        this.userId = fields ? fields.userId : '';
+        this.items = fields ? fields.items : [];
+        this.totalPrice = fields ? fields.totalPrice : 0;
     }
 
     updateTotalPrice(): void {

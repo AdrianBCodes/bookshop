@@ -35,7 +35,6 @@ export class CartService {
     return this.httpClient.post<void>(this.baseURL, body, httpOptions).pipe(
       catchError((error: HttpErrorResponse) => {
         const errorMessage = `Error occurred while adding item to cart. Request: ${this.baseURL}`;
-        console.log(error.message);
         return throwError(() => new Error(errorMessage));
       })
     );
@@ -52,7 +51,6 @@ export class CartService {
     return this.httpClient.put<void>(this.baseURL, body, httpOptions).pipe(
       catchError((error: HttpErrorResponse) => {
         const errorMessage = `Error occurred while editing cart item. Request: ${this.baseURL}`;
-        console.log(error.message);
         return throwError(() => new Error(errorMessage));
       })
     );

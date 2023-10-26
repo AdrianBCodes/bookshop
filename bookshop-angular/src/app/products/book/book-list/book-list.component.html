@@ -1,0 +1,9 @@
+
+<app-product-list 
+headerTitle="Books"
+ [products]="books" 
+ [isShowMoreActive]="true"
+ [showMoreLink]="'books'"
+ [isPageNavActive]="true"
+ (nextPage)="nextPage()"
+ (previousPage)="previousPage()" />
