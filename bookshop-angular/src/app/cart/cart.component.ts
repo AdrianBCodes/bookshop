@@ -62,9 +62,6 @@ export class CartComponent implements OnInit {
   onInputQuantityChange(event: Event, item: CartItem): void{
     const inputElement = event.target as HTMLInputElement;
     const inputValue = parseInt(inputElement.value, 10);
-    
-    console.log(inputElement);
-    console.log(inputValue);
 
     if(inputElement.value=='')
       return;
