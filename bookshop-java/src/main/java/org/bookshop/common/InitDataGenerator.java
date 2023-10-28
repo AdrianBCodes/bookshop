@@ -3,6 +3,8 @@ package org.bookshop.common;
 import org.bookshop.book.Book;
 import org.bookshop.book.BookBuilder;
 import org.bookshop.book.BookCategory;
+import org.bookshop.book.BookMapper;
+import org.bookshop.book.infrastructure.BookEntity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class InitDataGenerator {
         IntStream.rangeClosed(1, number)
                 .forEach(i -> books.add(
                     BookBuilder.builder()
-                            .withId(String.valueOf(i))
+                            .withId(String.format("Bk%d", i))
                             .withName(String.format("Book%d", i))
                             .withDescription(String.format("Description%d", i))
                             .withPrice(BigDecimal.valueOf(i))
@@ -23,5 +25,9 @@ public class InitDataGenerator {
                             .buildWithId()));
 
         return books;
+    }
+
+    public static List<BookEntity> generateBooksEntities(int number) {
+        return new ArrayList<>(BookMapper.booksDomainToEntity(generateBooks(number)));
     }
 }

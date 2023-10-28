@@ -1,7 +1,6 @@
 package org.bookshop.book.infrastructure;
 
 import com.mongodb.lang.NonNull;
-import org.bookshop.book.Book;
 import org.bookshop.book.BookRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,39 +13,39 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-public interface SqlBookRepository extends BookRepository, MongoRepository<Book, String> {
+public interface SqlBookRepository extends BookRepository, MongoRepository<BookEntity, String> {
     @NonNull
-    Page<Book> findAll(@NonNull Pageable pageable);
+    Page<BookEntity> findAll(@NonNull Pageable pageable);
 
-    Set<Book> findBooksByIdIn(List<String> ids);
+    Set<BookEntity> findBooksByIdIn(List<String> ids);
 
     @Override
-    default Optional<Book> findBookById(String id){
+    default Optional<BookEntity> findBookById(String id){
         return this.findById(id);
     }
 
     @Override
-    default Map<String, Book> findBooksByIds(List<String> ids) {
+    default Map<String, BookEntity> findBooksByIds(List<String> ids) {
         return this.findBooksByIdIn(ids).stream()
                 .collect(Collectors.toMap(
-                        Book::getId,
-                        book -> book
+                        BookEntity::getId,
+                        bookEntity -> bookEntity
         ));
     }
 
     @Override
-    default Page<Book> findAllBooks(Pageable pageable) {
+    default Page<BookEntity> findAllBooks(Pageable pageable) {
         return this.findAll(pageable);
     }
 
     @Override
-    default String saveBook(Book entity) {
+    default String saveBook(BookEntity entity) {
         this.save(entity);
         return entity.getId();
     }
 
     @Override
-    default void saveAllBooks(List<Book> entities){
+    default void saveAllBooks(List<BookEntity> entities){
         this.saveAll(entities);
     }
 }

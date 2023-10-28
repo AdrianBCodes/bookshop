@@ -2,29 +2,22 @@ package org.bookshop.book;
 
 import org.bookshop.book.dto.BookDTO;
 import org.bookshop.product.Product;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
 
-@Document(collection = "books")
 public class Book implements Product {
 
-    @MongoId(FieldType.STRING)
-    String id;
-    String name;
-    String description;
-    BookCategory category;
-    @Field(targetType = FieldType.DECIMAL128)
-    BigDecimal price;
+    private String id;
+    private String name;
+    private String description;
+    private BookCategory category;
+    private BigDecimal price;
 
     public Book(String id, String name, String description, BookCategory category, BigDecimal price) {
-        this.id = "Bk" + id;
+        this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;
@@ -51,6 +44,14 @@ public class Book implements Product {
     @Override
     public String getName() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BookCategory getCategory() {
+        return category;
     }
 
     @Override

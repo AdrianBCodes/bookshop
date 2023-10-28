@@ -32,7 +32,7 @@ public class DatabaseChangeLog {
 
     @ChangeSet(order = "002", id = "initBooksData", author = "AdrianBCodes")
     public void initBooksData(BookRepository bookRepository){
-        bookRepository.saveAllBooks(InitDataGenerator.generateBooks(15));
+        bookRepository.saveAllBooks(InitDataGenerator.generateBooksEntities(15));
     }
 
     @ChangeSet(order = "003", id = "changeBooksValidation", author = "AdrianBCodes")
