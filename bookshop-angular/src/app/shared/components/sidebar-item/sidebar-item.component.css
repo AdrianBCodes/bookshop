@@ -1,0 +1,29 @@
+.choice-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .choice-list li {
+    margin-bottom: 2%;
+  }
+
+  .choice-list .entry {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2%;
+    border: 1px solid #ccc;
+    padding: 2%;
+    border-radius: 5px;
+}
+
+  .choice-list span {
+    display: flex;
+    align-items: center;
+  }
+
+  .count {
+      font-size: x-small;
+      margin-left: 5px;
+      color: #555;
+  }
+  

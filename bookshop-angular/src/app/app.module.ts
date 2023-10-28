@@ -13,6 +13,8 @@ import { ButtonCustomComponent } from './shared/components/button-custom/button-
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { BookListingPageComponent } from './pages/book-listing-page/book-listing-page.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { SidebarItemComponent } from './shared/components/sidebar-item/sidebar-item.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { BookListingPageComponent } from './pages/book-listing-page/book-listing
     HomePageComponent,
     ProductListComponent,
     BookListingPageComponent,
+    SidebarComponent,
+    SidebarItemComponent,
   ],
   imports: [
     BrowserModule,

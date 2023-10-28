@@ -13,6 +13,7 @@ export class BookListingPageComponent {
   totalElements: number = 0;
   totalPages: number = 0;
   params: PageParams = { page: 0, size: 20 };
+  categoriesMap: Map<String, Number> = new Map()
 
   constructor(private bookService: BookService) { }
 

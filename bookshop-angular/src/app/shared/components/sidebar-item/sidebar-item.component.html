@@ -1,0 +1,14 @@
+<div class="sidebar-item">
+    <h2>{{title}}</h2>
+    <ul class="choice-list">
+        <li *ngFor="let entry of contentToArray()">
+          <div class="entry">
+            <input type="checkbox">
+            <span>
+              <b>{{ entry[0] }}</b>
+              <span class="count">({{ entry[1] }})</span>
+            </span>
+          </div>
+        </li>
+      </ul>
+</div>

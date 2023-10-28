@@ -16,7 +16,11 @@
             <img src="../../../assets/images/default_book_avatar.png" 
             alt="Avatar" style="width:100%; max-width: 80px;">
             </a>
-            <h4 style="min-height: 6em"><p><a (click)="navigateToProductDetails(product.id)">{{product.name}}</a></p></h4>
+            <div class="truncated-text" style="min-height: 6em;">
+                <p>
+                    <a (click)="navigateToProductDetails(product.id)">{{product.name}}</a>
+                </p>
+            </div>
             <p class="price">{{product.price.toFixed(2)}}</p>
             <app-button-custom (click)="addToCart(product.id)" text="Add to Cart"></app-button-custom>
         </div>

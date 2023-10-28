@@ -53,3 +53,25 @@ p a {
     float: right;
     margin-left: 1%;
 }
+
+.truncated-text {
+    white-space: pre-line;
+    max-height: 3em; /* Adjust as needed */
+    overflow: hidden;
+}
+
+.truncated-text::before {
+    content: attr(data-content);
+    position: relative;
+    top: -1em;
+    left: 100%;
+    white-space: nowrap;
+}
+
+.truncated-text::after {
+    content: '...';
+    position: relative;
+    top: -1em;
+    left: 100%;
+    white-space: nowrap;
+}
