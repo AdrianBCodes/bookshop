@@ -3,6 +3,8 @@ package book;
 import org.bookshop.book.Book;
 import org.bookshop.book.BookBuilder;
 import org.bookshop.book.BookCategory;
+import org.bookshop.book.BookMapper;
+import org.bookshop.book.infrastructure.BookEntity;
 
 import java.math.BigDecimal;
 
@@ -19,6 +21,10 @@ public class BookExample {
                 .buildWithId();
     }
 
+    public static BookEntity getBookEntity1() {
+        return BookMapper.bookDomainToEntity(getBook1());
+    }
+
     public static Book getBook2() {
         return BookBuilder
                 .builder()
@@ -28,6 +34,10 @@ public class BookExample {
                 .withPrice(BigDecimal.TEN)
                 .withCategory(BookCategory.SF)
                 .buildWithId();
+    }
+
+    public static BookEntity getBookEntity2() {
+        return BookMapper.bookDomainToEntity(getBook2());
     }
 
 }

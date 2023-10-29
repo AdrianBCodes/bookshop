@@ -1,6 +1,6 @@
 package org.bookshop.configuration;
 
-import org.bookshop.book.BookService;
+import org.bookshop.book.BookProvider;
 import org.bookshop.book.infrastructure.SqlBookRepository;
 import org.bookshop.cart.CartProvider;
 import org.bookshop.cart.cartItem.CartItemProvider;
@@ -15,8 +15,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfiguration {
     @Bean
-    BookService bookService(SqlBookRepository sqlBookRepository){
-        return new BookService(sqlBookRepository);
+    BookProvider bookProvider(SqlBookRepository sqlBookRepository){
+        return new BookProvider(sqlBookRepository);
     }
 
     @Bean

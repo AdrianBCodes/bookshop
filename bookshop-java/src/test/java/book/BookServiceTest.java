@@ -1,8 +1,7 @@
 package book;
 
-import org.bookshop.book.Book;
-import org.bookshop.book.BookRepository;
-import org.bookshop.book.BookService;
+import org.bookshop.book.*;
+import org.bookshop.book.infrastructure.BookEntity;
 import org.bookshop.exceptions.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,21 +22,24 @@ class BookServiceTest {
     private BookRepository bookRepositoryMock;
 
     private BookService bookService;
+    private BookProvider bookProvider;
 
     @BeforeEach
     void init() {
         MockitoAnnotations.openMocks(this);
         bookRepositoryMock = mock(BookRepository.class);
-        bookService = new BookService(bookRepositoryMock);
+        bookProvider = new BookProvider(bookRepositoryMock);
+        bookService = new BookService(bookProvider);
     }
 
     @Test
     public void findById() {
         // given
         Book book = BookExample.getBook1();
-        given(bookRepositoryMock.saveBook(book)).willReturn(book.getId());
-        given(bookRepositoryMock.findBookById(book.getId())).willReturn(Optional.of(book));
-        bookRepositoryMock.saveBook(book);
+        BookEntity bookEntity = BookMapper.bookDomainToEntity(book);
+        given(bookRepositoryMock.saveBook(bookEntity)).willReturn(book.getId());
+        given(bookRepositoryMock.findBookById(book.getId())).willReturn(Optional.of(bookEntity));
+        bookRepositoryMock.saveBook(bookEntity);
         // when
         var result = bookService.findBookById(book.getId());
         // then
@@ -61,8 +63,10 @@ class BookServiceTest {
         // given
         Book book = BookExample.getBook1();
         Book book2 = BookExample.getBook2();
+        BookEntity bookEntity1 = BookExample.getBookEntity1();
+        BookEntity bookEntity2 = BookExample.getBookEntity2();
         given(bookRepositoryMock.findAllBooks(PageRequest.of(0, 5)))
-                .willReturn(new PageImpl<>(List.of(book, book2), PageRequest.of(0, 5), 2));
+                .willReturn(new PageImpl<>(List.of(bookEntity1, bookEntity2), PageRequest.of(0, 5), 2));
         // when
         var result = bookService.findAllBooks(PageRequest.of(0,5));
         // then
