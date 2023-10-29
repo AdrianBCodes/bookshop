@@ -28,6 +28,6 @@ public class InitDataGenerator {
     }
 
     public static List<BookEntity> generateBooksEntities(int number) {
-        return new ArrayList<>(BookMapper.booksDomainToEntity(generateBooks(number)));
+        return BookMapper.booksDomainToEntity(generateBooks(number));
     }
 }
